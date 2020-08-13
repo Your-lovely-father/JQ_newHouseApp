@@ -1,0 +1,170 @@
+/*公用底部区域*/
+.footer{
+    width: 100%;
+    background-color: #fafafa;
+    border-top: 1px solid #dfdfdf;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 200;
+}
+.footer>ul{
+    width: 100%;
+    /*background-color: #fafafa;*/
+    background: white;
+    display: flex;
+}
+.footer>ul>li{
+    width: 25%;
+    text-align: center;
+    justify-content: space-around;
+    padding: 3px 0;
+}
+.footer>ul>li>a{
+    width: 100%;
+    display: block;
+}
+.footer>ul>li>a>span{
+    font-size: .7rem;
+    color: #888888;
+}
+.footer>ul>li>a>p{
+    font-size: .4rem;
+    color: #888888;
+}
+/*公用推荐楼盘区域*/
+.tower{
+    width: 100%;
+    margin-top: .8rem;
+}
+.tower_title{
+    width: 100%;
+    padding: 0 .4rem ;
+    box-sizing: border-box;
+    display: flex;
+}
+.tower_title>p:nth-child(1){
+    width: 0.13rem;
+    background: #c22c1e;
+    margin-right: .3rem;
+}
+.tower_title>p:nth-child(2){
+    font-size: .45rem;
+    color: #333;
+}
+.tower{
+    width: 100%;
+    margin-bottom: 1.8rem;
+}
+.tower_content{
+    width: 100%;
+    padding: .35rem .4rem;
+    box-sizing: border-box;
+}
+.tower_content>a{
+    width: 100%;
+    display: block;
+    display: flex;
+}
+.tower_left{
+    width: 45%;
+    height: 3.5rem;
+    position: relative;
+    margin-right: .4rem;
+}
+.tower_left>img{
+    width: 100%;
+    height: 3.5rem;
+    border-radius: .3rem;
+}
+.tower_left>p{
+    width: 1rem;
+    font-size: .3rem;
+    background: #ee8379;
+    color: #fff;
+    text-align: center;
+    padding: .1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+    border-top-left-radius:.3rem;
+    border-bottom-right-radius:.3rem;
+}
+.tower_right{
+    width: 50%;
+}
+.right_title{
+    width: 100%;
+    font-size: .45rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.right_m{
+    margin-top: .1rem;
+    width: 100%;
+    height: .5rem;
+    display: flex;
+    color: #959595;
+    font-size: .4rem;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+}
+.right_m>p:nth-child(2){
+    width: 0.03rem;
+    height: .5rem;
+    background: #f1f1f1;
+}
+.right_area{
+    width: 100%;
+    display: flex;
+    margin-top: .2rem;
+}
+.right_area>p{
+    padding: .1rem .25rem;
+    font-size: .3rem;
+    margin-right: .2rem;
+    border-radius: .1rem;
+}
+.right_area>p:nth-child(1){
+    background: #eff1fd;
+    color: #717fbc;
+}
+.right_area>p:nth-child(2){
+    background: #e5f6ee;
+    color: #8de7c4;
+}
+.right_area>p:nth-child(3){
+    background: #fbf5e7;
+    color: #ffc96b;
+}
+.right_price{
+    width: 100%;
+    color: #e15f3f;
+    font-size: .4rem;
+    font-weight: bold;
+    display: flex;
+    margin-top: .1rem;
+}
+.right_price>p:nth-child(1)>span{
+    font-size: .1rem;
+}
+.right_price>p:nth-child(1){
+    margin-right: .5rem;
+}
+
+.right_servant{
+    width: 100%;
+    display: flex;
+    color: red;
+    font-size: .4rem;
+    margin-top: .1rem;
+}
+.right_servant>p:nth-child(1){
+    background: #f8c1c7;
+    padding: 0 .1rem;
+    margin-right: .3rem;
+}

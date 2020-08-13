@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <title>楼盘</title>
+    <link rel="stylesheet" href="static/css/layouts/layouts.css" />
+    <link rel="stylesheet" href="static/css/libs/font/iconfont.css">
+    <link rel="stylesheet" href="static/css/common/footer.css">
+    <link rel="stylesheet" href="static/css/building.css">
+    <script type="text/javascript" src="static/js/plugins/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/plugins/rem.js"></script>
+</head>
+<body>
+<div class="building">
+    <!--  搜索区域   -->
+    <div class="search_area">
+        <div class="search_area_left">
+            <span class="iconfont  icon-dingwei"></span>
+            <p>全国</p>
+        </div>
+        <div class="search_area_right">
+            <span class="iconfont icon-sousuo"></span>
+            <input type="text" placeholder="请输入楼盘">
+        </div>
+    </div>
+    <!--  定位城市区域  -->
+    <div class="city">
+    <!--   地区     -->
+        <div class="area_box">
+            <ul>
+                <li class="area_box_title">
+                    当前城市定位
+                </li>
+                <li class="choice_area">
+                    <p>大同</p>
+                </li>
+                <li class="letter">
+                    <a name="A">
+                        <p class="on">A</p>
+                        <p class="yes">安徽</p>
+                    </a>
+                </li>
+                <li class="letter">
+                    <a name="C">
+                        <p class="on">C</p>
+                        <p class="yes border">昌吉市</p>
+                        <p class="yes">楚雄</p>
+                    </a>
+                </li>
+                <li class="letter">
+                    <a name="D">
+                        <p class="on">D</p>
+                        <p class="yes">大同</p>
+                    </a>
+                </li>
+                <li class="letter">
+                    <a name="H">
+                        <p class="on">H</p>
+                        <p class="yes border">合肥</p>
+                        <p class="yes">鹤壁</p>
+                    </a>
+                </li>
+                <li class="letter">
+                    <a name="J">
+                        <p class="on">J</p>
+                        <p class="yes">嘉兴</p>
+                    </a>
+                </li>
+                <li class="letter">
+                    <a name="L">
+                        <p class="on">L</p>
+                        <p class="yes border">来宾</p>
+                        <p class="yes">禄丰县</p>
+                    </a>
+                </li>
+                <li class="letter">
+                    <a name="Q">
+                        <p class="on">Q</p>
+                        <p class="yes">全国</p>
+                    </a>
+                </li>
+                <li class="letter">
+                    <a name="S">
+                        <p class="on">S</p>
+                        <p class="yes border">上海</p>
+                        <p class="yes">深圳</p>
+                    </a>
+                </li>
+                <li class="letter">
+                    <a name="W">
+                        <p class="on">W</p>
+                        <p class="yes border">威海</p>
+                        <p class="yes">武汉</p>
+                    </a>
+                </li>
+                <li class="letter">
+                    <a name="X">
+                        <p class="on">X</p>
+                        <p class="yes border">徐州</p>
+                        <p class="yes">熊安新区</p>
+                    </a>
+                </li>
+                <li class="letter">
+                    <a name="Z">
+                        <p class="on">Z</p>
+                        <p class="yes">郑州</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--   地区首字母     -->
+        <div class="city_right">
+            <a href="#A">A</a>
+            <a href="#C">C</a>
+            <a href="#D">D</a>
+            <a href="#H">H</a>
+            <a href="#J">J</a>
+            <a href="#L">L</a>
+            <a href="#Q">Q</a>
+            <a href="#S">S</a>
+            <a href="#W">W</a>
+            <a href="#X">X</a>
+            <a href="#Z">Z</a>
+        </div>
+    </div>
+    <!--  筛选区域   -->
+    <div class="filtrate">
+        <ul>
+            <li>
+               <div class="filtrs_title">
+                   <p class="area">区域</p>
+                   <span class="iconfont icon-xiajiantou areaHide"></span>
+                   <span class="iconfont icon-shangjiantou areaShow"></span>
+               </div>
+                <ol class="orientation">
+                    <li>
+                        <p class="all">全部</p>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <div class="filtrs_title">
+                    <p class="rank">排序</p>
+                    <span class="iconfont icon-xiajiantou rankHide"></span>
+                    <span class="iconfont icon-shangjiantou rankShow"></span>
+                </div>
+                <ol class="sort">
+                    <li>
+                        <p>综合排序</p>
+                        <p>价格排序</p>
+                        <p>价格降序</p>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <div class="filtrs_title">
+                    <p class="genre">类型</p>
+                    <span class="iconfont icon-xiajiantou genreHide"></span>
+                    <span class="iconfont icon-shangjiantou genreShow"></span>
+                </div>
+                <ol class="type_model">
+                    <li>
+                        <p>推荐</p>
+                        <p>热销</p>
+                    </li>
+                </ol>
+            </li>
+            <li>
+                <div class="filtrs_title">
+                    <p class="unit">面积</p>
+                    <span class="iconfont icon-xiajiantou unitHide"></span>
+                    <span class="iconfont icon-shangjiantou unitShow"></span>
+                </div>
+                <ol class="acreage">
+                    <li>
+                        <p>60m<sup>2</sup></p>
+                        <p>60-80m<sup>2</sup></p>
+                        <p>60-100m<sup>2</sup></p>
+                        <p>120-140m<sup>2</sup></p>
+                        <p>180-200m<sup>2</sup></p>
+                    </li>
+                </ol>
+            </li>
+        </ul>
+    </div>
+    <!--  推荐楼盘内容区域区域   -->
+    <div class="tower">
+        <div class="tower_content">
+            <a href="">
+                <div class="tower_left">
+                    <img src="static/img/bulid.jpg" alt="">
+                    <p>热销</p>
+                </div>
+                <div class="tower_right">
+                    <div class="right_title">柏林时代●二期</div>
+                    <div class="right_m">
+                        <p>85-150 m<sup>2</sup></p>
+                        <p></p>
+                        <p>2-4室</p>
+                    </div>
+                    <div class="right_area">
+                        <p>合肥</p>
+                        <p>二居</p>
+                        <p>大三居</p>
+                    </div>
+                    <div class="right_price">
+                        <p>70万<span>起</span></p>
+                        <p>待定</p>
+                    </div>
+                    <div class="right_servant">
+                        <p>佣</p>
+                        <p>35万</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="tower_content">
+            <a href="">
+                <div class="tower_left">
+                    <img src="static/img/bulid.jpg" alt="">
+                    <p>热销</p>
+                </div>
+                <div class="tower_right">
+                    <div class="right_title">柏林时代●二期</div>
+                    <div class="right_m">
+                        <p>85-150 m<sup>2</sup></p>
+                        <p></p>
+                        <p>2-4室</p>
+                    </div>
+                    <div class="right_area">
+                        <p>合肥</p>
+                        <p>二居</p>
+                        <p>大三居</p>
+                    </div>
+                    <div class="right_price">
+                        <p>70万<span>起</span></p>
+                        <p>待定</p>
+                    </div>
+                    <div class="right_servant">
+                        <p>佣</p>
+                        <p>35万</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="tower_content">
+            <a href="">
+                <div class="tower_left">
+                    <img src="static/img/bulid.jpg" alt="">
+                    <p>热销</p>
+                </div>
+                <div class="tower_right">
+                    <div class="right_title">柏林时代●二期</div>
+                    <div class="right_m">
+                        <p>85-150 m<sup>2</sup></p>
+                        <p></p>
+                        <p>2-4室</p>
+                    </div>
+                    <div class="right_area">
+                        <p>合肥</p>
+                        <p>二居</p>
+                        <p>大三居</p>
+                    </div>
+                    <div class="right_price">
+                        <p>70万<span>起</span></p>
+                        <p>待定</p>
+                    </div>
+                    <div class="right_servant">
+                        <p>佣</p>
+                        <p>35万</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        </a>
+    </div>
+    <!--  底部  -->
+    <div class="footer">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="iconfont icon-icon_huabanfuben"></span>
+                    <p>首页</p>
+                </a>
+            </li>
+            <li class="active">
+                <a href="building.html">
+                    <span class="iconfont icon-ziyuan"></span>
+                    <p>楼盘</p>
+                </a>
+            </li>
+            <li>
+                <a href="customer.html">
+                    <span class="iconfont icon-kehu"></span>
+                    <p>客户</p>
+                </a>
+            </li>
+            <li>
+                <a href="my.html">
+                    <span class="iconfont icon-wode"></span>
+                    <p>我的</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        //定位
+        $('.search_area_left').click(function () {
+            $('.city').show()
+        });
+        $('.area_box>ul>.choice_area>p').click(function () {
+            $('.city').hide()
+        });
+        $('ol').click(function () {
+            $('ol').hide()
+        });
+        //区域
+        function area(){
+            $('.orientation').hide();
+            $('.area').css('color','');
+            $('.areaHide').show();
+            $('.areaShow').hide();
+            $('.areaShow').css('color','')
+        }
+        $('.area').click(function () {
+            rank();
+            genre();
+            unit();
+            $('.orientation').show();
+            $('.area').css('color','red');
+            $('.areaHide').hide();
+            $('.areaShow').show();
+            $('.areaShow').css('color','red');
+        });
+        $('.all').click(function () {
+            area()
+        });
+
+        //排序
+        function rank(){
+            $('.sort').hide();
+            $('.rank').css('color','');
+            $('.rankHide').show();
+            $('.rankShow').hide();
+            $('.rankShow').css('color','')
+        }
+        $('.rank').click(function () {
+            area();
+            genre();
+            unit();
+            $('.sort').show();
+            $('.rank').css('color','red');
+            $('.rankHide').hide();
+            $('.rankShow').show();
+            $('.rankShow').css('color','red')
+        });
+        $('.sort>li>p').click(function () {
+            rank()
+        });
+
+        //类别
+        function genre(){
+            $('.type_model').hide();
+            $('.genre').css('color','');
+            $('.genreHide').show();
+            $('.genreShow').hide();
+            $('.genreShow').css('color','')
+        }
+        $('.genre').click(function () {
+            area();
+            rank();
+            unit();
+            $('.type_model').show();
+            $('.genre').css('color','red');
+            $('.genreHide').hide();
+            $('.genreShow').show();
+            $('.genreShow').css('color','red')
+        });
+        $('.type_model>li>p').click(function () {
+            genre()
+        });
+
+        //面积
+        function unit(){
+            $('.acreage').hide();
+            $('.unit').css('color','');
+            $('.unitHide').show();
+            $('.unitShow').hide();
+            $('.unitShow').css('color','')
+        }
+        $('.unit').click(function () {
+            area();
+            rank();
+            genre();
+            $('.acreage').show();
+            $('.unit').css('color','red');
+            $('.unitHide').hide();
+            $('.unitShow').show();
+            $('.unitShow').css('color','red')
+        });
+        $('.acreage>li>p').click(function () {
+            unit()
+        });
+    })
+</script>
+</html>

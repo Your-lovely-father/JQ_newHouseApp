@@ -1,0 +1,9 @@
+.customer{
+    width: 100%;
+}
+.active span{
+    color: #f58611 !important;
+}
+.active p{
+    color: #f58611 !important;
+}
