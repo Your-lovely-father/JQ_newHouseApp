@@ -7,3 +7,118 @@
 .active p{
     color: #f58611 !important;
 }
+.head_portrait{
+    width: 100%;
+    height: 5rem;
+    padding: .4rem;
+    box-sizing: border-box;
+    background-image: linear-gradient(to right, #cd2f23 , #e95b29);
+    display: flex;
+    align-items: center;
+}
+.head_portrait_img{
+    border-radius: 50%;
+    width: 2.5rem;
+    border: .1rem solid #fff;
+    margin-right: .4rem;
+}
+.head_portrait_img>img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.head_portrait_text{
+    color: #fff;
+}
+.head_portrait_text>p{
+    padding: .3rem 0;
+}
+.head_portrait_text>p:nth-child(1){
+    font-size: .5rem;
+    font-weight: bold;
+}
+.head_portrait_text>p:nth-child(2){
+    font-size: .4rem;
+}
+.distribution{
+    width: 100%;
+    padding: .4rem;
+    box-sizing: border-box;
+    margin-top: -1rem;
+}
+.distribution>ul{
+    width: 100%;
+    background: #fff;
+    border-radius: .2rem;
+    box-shadow: 3px 3px 5px #888888;
+    padding: 0.3rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-around;
+}
+.distribution>ul>li{
+    text-align: center;
+    font-size: .4rem;
+    color: #666666;
+
+}
+.distribution>ul>li:nth-child(2){
+    width: 0.03rem;
+    background: #cccccc;
+}
+.distribution>ul>li>a .price{
+    margin-top: .45rem;
+}
+.distribution>ul>li>a{
+    width: 100%;
+    display: block;
+}
+.agent{
+    width: 100%;
+    padding: .2rem .4rem .4rem .4rem ;
+    box-sizing: border-box;
+}
+.agent_box{
+    width: 100%;
+    padding: .3rem;
+    background: #fff;
+    border-radius: .2rem;
+    box-shadow: 3px 3px 5px #888888;
+    box-sizing: border-box;
+}
+.agent_box>ul{
+    width: 100%;
+    display: flex;
+    flex-flow: wrap;
+    margin-top: .3rem;
+}
+.agent_box>ul>li{
+    width: 25%;
+    padding: .2rem 0;
+    box-sizing: border-box;
+}
+.agent_box>ul>li>a{
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+.agent_box>ul>li>a>span{
+    font-size: .8rem;
+    background-image: linear-gradient(#cd2f23,#e95b29);
+    -webkit-background-clip: text;
+    color:transparent;
+}
+.agent_title{
+    font-size: .45rem;
+    font-weight: bold;
+    color: #464646;
+}
+.agent_box>ul>li>a>p{
+    font-size: .4rem;
+    color: #464646;
+    font-weight: bold;
+    margin-top: .2rem;
+}
+.bottom{
+    margin-bottom: 2rem;
+}

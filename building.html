@@ -189,7 +189,7 @@
     <!--  推荐楼盘内容区域区域   -->
     <div class="tower">
         <div class="tower_content">
-            <a href="">
+            <a href="view/details/details.html">
                 <div class="tower_left">
                     <img src="static/img/bulid.jpg" alt="">
                     <p>热销</p>
@@ -218,7 +218,7 @@
             </a>
         </div>
         <div class="tower_content">
-            <a href="">
+            <a href="view/details/details.html">
                 <div class="tower_left">
                     <img src="static/img/bulid.jpg" alt="">
                     <p>热销</p>
@@ -247,7 +247,7 @@
             </a>
         </div>
         <div class="tower_content">
-            <a href="">
+            <a href="view/details/details.html">
                 <div class="tower_left">
                     <img src="static/img/bulid.jpg" alt="">
                     <p>热销</p>
@@ -312,13 +312,21 @@
     $(function () {
         //定位
         $('.search_area_left').click(function () {
-            $('.city').show()
+            $('.city').show();
+            area();
+            rank();
+            genre();
+            unit();
         });
         $('.area_box>ul>.choice_area>p').click(function () {
             $('.city').hide()
         });
         $('ol').click(function () {
-            $('ol').hide()
+            $('ol').hide();
+            area();
+            rank();
+            genre();
+            unit();
         });
         //区域
         function area(){

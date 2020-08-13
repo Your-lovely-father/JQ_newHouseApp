@@ -51,6 +51,7 @@
 .tower_title>p:nth-child(2){
     font-size: .45rem;
     color: #333;
+    font-weight: bold;
 }
 .tower{
     width: 100%;
@@ -167,4 +168,28 @@
     background: #f8c1c7;
     padding: 0 .1rem;
     margin-right: .3rem;
+}
+/*
+   导航头样式
+*/
+.head_nav{
+    width: 100%;
+    padding: 3% .4rem;
+    background-color: #c72a23;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 200;
+    color: #fff;
+    font-size: .5rem;
+    box-sizing: border-box;
+}
+.head_nav>ul{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.head_nav>ul>li>a>span{
+    color: #fff;
+    font-size: .5rem;
 }

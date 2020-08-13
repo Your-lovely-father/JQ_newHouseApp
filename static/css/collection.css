@@ -1,0 +1,10 @@
+.collection{
+    width: 100%;
+}
+.tower{
+    margin-bottom: 0 !important;
+    margin-top: 1.5rem !important;
+}
+.tower_left>p {
+    background: #b28ff5 !important;
+}
