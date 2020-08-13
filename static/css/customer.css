@@ -7,3 +7,11 @@
 .active p{
     color: #f58611 !important;
 }
+.tab{
+    width: 100%;
+    padding: .4rem;
+    box-sizing: border-box;
+}
+.on{
+    margin-top: .5rem;
+}

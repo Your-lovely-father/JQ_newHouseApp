@@ -1,0 +1,51 @@
+.certification{
+    width: 100%;
+}
+.information{
+    margin: 1.8rem .4rem .4rem .4rem;
+    box-sizing: border-box;
+}
+.information_box{
+    width: 100%;
+    padding: .4rem;
+    box-sizing: border-box;
+    border-radius: .2rem;
+    background: #ffffff;
+    box-shadow: 0 0 3px 1px #eee;
+}
+.information_title{
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    padding-bottom: .2rem;
+}
+.information_title>p{
+    font-size: .4rem;
+    font-weight: bold;
+}
+.information_content{
+    width: 100%;
+}
+.article_box{
+    width: 100%;
+    display: flex;
+}
+.text{
+    width: 92%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #eee;
+    padding: .3rem 0;
+}
+.text>p{
+    font-size: .35rem;
+}
+.icon{
+    width: 8%;
+    padding: .3rem 0;
+
+}
+.icon>span{
+    display: block;
+    color: #c72a23;
+    font-weight: bold;
+}

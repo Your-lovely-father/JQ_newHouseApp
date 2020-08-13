@@ -1,5 +1,5 @@
 /*公用底部区域*/
-.footer{
+.footer {
     width: 100%;
     background-color: #fafafa;
     border-top: 1px solid #dfdfdf;
@@ -8,77 +8,92 @@
     left: 0;
     z-index: 200;
 }
-.footer>ul{
+
+.footer > ul {
     width: 100%;
     /*background-color: #fafafa;*/
     background: white;
     display: flex;
 }
-.footer>ul>li{
+
+.footer > ul > li {
     width: 25%;
     text-align: center;
     justify-content: space-around;
     padding: 3px 0;
 }
-.footer>ul>li>a{
+
+.footer > ul > li > a {
     width: 100%;
     display: block;
 }
-.footer>ul>li>a>span{
+
+.footer > ul > li > a > span {
     font-size: .7rem;
     color: #888888;
 }
-.footer>ul>li>a>p{
+
+.footer > ul > li > a > p {
     font-size: .4rem;
     color: #888888;
 }
+
 /*公用推荐楼盘区域*/
-.tower{
+.tower {
     width: 100%;
     margin-top: .8rem;
 }
-.tower_title{
+
+.tower_title {
     width: 100%;
-    padding: 0 .4rem ;
+    padding: 0 .4rem;
     box-sizing: border-box;
     display: flex;
 }
-.tower_title>p:nth-child(1){
+
+.tower_title > p:nth-child(1) {
     width: 0.13rem;
     background: #c22c1e;
     margin-right: .3rem;
 }
-.tower_title>p:nth-child(2){
+
+.tower_title > p:nth-child(2) {
     font-size: .45rem;
     color: #333;
     font-weight: bold;
 }
-.tower{
+
+.tower {
     width: 100%;
     margin-bottom: 1.8rem;
 }
-.tower_content{
+
+.tower_content {
     width: 100%;
     padding: .35rem .4rem;
     box-sizing: border-box;
 }
-.tower_content>a{
+
+.tower_content > a {
     width: 100%;
     display: block;
     display: flex;
 }
-.tower_left{
+
+.tower_left {
     width: 45%;
     height: 3.5rem;
     position: relative;
     margin-right: .4rem;
 }
-.tower_left>img{
+
+.tower_left > img {
     width: 100%;
     height: 3.5rem;
     border-radius: .3rem;
 }
-.tower_left>p{
+
+.tower_left > p {
     width: 1rem;
     font-size: .3rem;
     background: #ee8379;
@@ -89,21 +104,24 @@
     top: 0;
     left: 0;
     z-index: 99;
-    border-top-left-radius:.3rem;
-    border-bottom-right-radius:.3rem;
+    border-top-left-radius: .3rem;
+    border-bottom-right-radius: .3rem;
 }
-.tower_right{
+
+.tower_right {
     width: 50%;
 }
-.right_title{
+
+.right_title {
     width: 100%;
     font-size: .45rem;
     font-weight: bold;
     overflow: hidden;
-    text-overflow:ellipsis;
+    text-overflow: ellipsis;
     white-space: nowrap;
 }
-.right_m{
+
+.right_m {
     margin-top: .1rem;
     width: 100%;
     height: .5rem;
@@ -114,35 +132,42 @@
     justify-content: space-between;
     box-sizing: border-box;
 }
-.right_m>p:nth-child(2){
+
+.right_m > p:nth-child(2) {
     width: 0.03rem;
     height: .5rem;
     background: #f1f1f1;
 }
-.right_area{
+
+.right_area {
     width: 100%;
     display: flex;
     margin-top: .2rem;
 }
-.right_area>p{
+
+.right_area > p {
     padding: .1rem .25rem;
     font-size: .3rem;
     margin-right: .2rem;
     border-radius: .1rem;
 }
-.right_area>p:nth-child(1){
+
+.right_area > p:nth-child(1) {
     background: #eff1fd;
     color: #717fbc;
 }
-.right_area>p:nth-child(2){
+
+.right_area > p:nth-child(2) {
     background: #e5f6ee;
     color: #8de7c4;
 }
-.right_area>p:nth-child(3){
+
+.right_area > p:nth-child(3) {
     background: #fbf5e7;
     color: #ffc96b;
 }
-.right_price{
+
+.right_price {
     width: 100%;
     color: #e15f3f;
     font-size: .4rem;
@@ -150,29 +175,33 @@
     display: flex;
     margin-top: .1rem;
 }
-.right_price>p:nth-child(1)>span{
+
+.right_price > p:nth-child(1) > span {
     font-size: .1rem;
 }
-.right_price>p:nth-child(1){
+
+.right_price > p:nth-child(1) {
     margin-right: .5rem;
 }
 
-.right_servant{
+.right_servant {
     width: 100%;
     display: flex;
     color: red;
     font-size: .4rem;
     margin-top: .1rem;
 }
-.right_servant>p:nth-child(1){
+
+.right_servant > p:nth-child(1) {
     background: #f8c1c7;
     padding: 0 .1rem;
     margin-right: .3rem;
 }
+
 /*
    导航头样式
 */
-.head_nav{
+.head_nav {
     width: 100%;
     padding: 3% .4rem;
     background-color: #c72a23;
@@ -181,15 +210,87 @@
     left: 0;
     z-index: 200;
     color: #fff;
-    font-size: .5rem;
+    font-size: .4rem;
     box-sizing: border-box;
+    font-weight: bold;
 }
-.head_nav>ul{
+
+.head_nav > ul {
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-.head_nav>ul>li>a>span{
+
+.head_nav > ul > li > a > span {
     color: #fff;
     font-size: .5rem;
+}
+
+/*
+    提示框样式
+*/
+.prompt_box {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 999;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.prompt_box > p {
+    font-size: .3rem;
+    color: #fff;
+    background: rgba(0,0,0,0.8);
+    padding: .15rem .3rem;
+    border-radius: .15rem;
+}
+/*
+  搜索样式
+*/
+.search{
+    width: 100%;
+    background: #efefef;
+    height: .9rem;
+    border-radius: .2rem;
+    display: flex;
+    align-items: center;
+}
+.search>span{
+    display: block;
+    color: #9fa3a5;
+    margin-right: .2rem;
+    margin-left: 3.5rem;
+}
+.search>input{
+    display: block;
+    height: .9rem;
+}
+.con{
+    display: none;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 0 3px 1px #eee;
+    border-radius: 0.2rem;
+    padding: .4rem;
+    box-sizing: border-box;
+}
+.con_content{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px #eee solid;
+    padding: .2rem 0;
+}
+.con_content>p:nth-child(1){
+    font-size: .4rem;
+    color: #4b4b4b;
+}
+.con_content>p:nth-child(2){
+    font-size: .4rem;
+    font-weight: bold;
+    color: #474747;
+}
+.on{
+    display: block;
 }

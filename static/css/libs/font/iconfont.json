@@ -6,6 +6,13 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "2150786",
+      "name": "身份证",
+      "font_class": "credentials_icon",
+      "unicode": "e674",
+      "unicode_decimal": 58996
+    },
+    {
       "icon_id": "959111",
       "name": "下箭头",
       "font_class": "xiajiantou",

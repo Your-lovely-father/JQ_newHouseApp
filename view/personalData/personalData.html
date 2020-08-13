@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <title>我的资料</title>
+    <link rel="stylesheet" href="../../static/css/libs/font/iconfont.css">
+    <link rel="stylesheet" href="../../static/css/layouts/layouts.css"/>
+    <link rel="stylesheet" href="../../static/css/common/footer.css"/>
+    <link rel="stylesheet" href="../../static/css/personalData.css"/>
+    <script type="text/javascript" src="../../static/js/plugins/jquery.min.js"></script>
+    <script type="text/javascript" src="../../static/js/plugins/rem.js"></script>
+</head>
+<body>
+<div class="wode">
+    <!--  头部   -->
+    <div class="head_nav">
+        <ul>
+            <li>
+                <a href="javascript:history.go(-1)">
+                    <span class="iconfont icon-zuojiantou"></span>
+                </a>
+            </li>
+            <li>我的资料</li>
+            <li></li>
+        </ul>
+    </div>
+    <!--  头像区域   -->
+    <div class="head_portrait">
+        <div class="head_portrait_box">
+            <div class="image">
+                <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1162156213,1315517590&fm=26&gp=0.jpg" alt="">
+            </div>
+            <label for="fileinp">
+                <input type="button" id="btn" value="更换头像">
+                <input type="file" id="fileinp">
+            </label>
+        </div>
+    </div>
+    <!--  表单区域  -->
+    <div class="form_box">
+        <div class="form_content">
+            <div class="label_content name">
+                <a href="#">
+                    <p>昵称</p>
+                    <span class="iconfont icon-iconfonti"></span>
+                </a>
+            </div>
+            <div class="label_content">
+                <a href="../certification/certification.html">
+                    <p>认证信息</p>
+                    <span class="iconfont icon-iconfonti"></span>
+                </a>
+            </div>
+            <div class="label_content">
+                <a href="#">
+                    <p>绑定信息</p>
+                    <span class="iconfont icon-iconfonti"></span>
+                </a>
+            </div>
+        </div>
+        <div class="upd_password">
+            <div class="form_content">
+                <div class="label_content border">
+                    <a href="../../updPassword.html">
+                        <p>修改密码</p>
+                        <span class="iconfont icon-iconfonti"></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  弹框区域  -->
+    <div class="prompt_alert">
+        <div class="alert_box">
+            <div class="alert_herder">
+                <p></p>
+                <p>修改昵称</p>
+                <p>X</p>
+            </div>
+            <div class="alert_content">
+                <input type="text" placeholder="请输入昵称">
+            </div>
+            <div class="alert_footer">
+                <button>取消</button>
+                <button>确认</button>
+            </div>
+        </div>
+    </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(function () {
+        $('.name').click(function () {
+            $('.prompt_alert').show();
+             return false;
+        })
+    });
+    function shutDown() {
+        $('.prompt_alert').hide();
+    }
+    function promptBox(val){
+        $('.prompt_box').show();
+        $('.prompt_box>p').html(val);
+        setTimeout(function () {
+            $('.prompt_box').hide();
+        },1000);
+    }
+    //关闭X
+    $('.alert_herder>p:nth-child(3)').click(function () {
+        shutDown()
+    });
+    //取消
+    $('.alert_footer>button:nth-child(1)').click(function () {
+        shutDown();
+        promptBox('您已取消')
+    });
+    //确认
+    $('.alert_footer>button:nth-child(2)').click(function () {
+        shutDown();
+        promptBox('修改成功')
+    })
+</script>
+</html>

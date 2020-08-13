@@ -24,6 +24,7 @@
     border-radius: .5rem;
     display: flex;
     align-items: center;
+    margin-top: .3rem;
 }
 .search>span{
     display: block;
@@ -39,7 +40,7 @@
 .search_text{
     width: 100%;
     text-align: center;
-    margin-top: 1rem;
+    margin-top: .8rem;
 }
 .search_text>p{
     color: #ffffff;

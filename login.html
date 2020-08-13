@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <title>登录</title>
+    <link rel="stylesheet" href="static/css/layouts/layouts.css"/>
+    <link rel="stylesheet" href="static/css/common/footer.css"/>
+    <link rel="stylesheet" href="static/css/login.css">
+    <script type="text/javascript" src="static/js/plugins/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/plugins/rem.js"></script>
+</head>
+<body>
+    <div class="login">
+        <!--  logo区域    -->
+        <div class="login_content">
+                <div class="login_img">
+                    <img src="static/img/login.png" alt="">
+                    <p>可立刻</p>
+                </div>
+            </div>
+        <!--   表单登录区域   -->
+        <div class="login_box">
+            <div class="login_article">
+                <div class="login_left">
+                    <span>* </span><span>手机号</span>
+                </div>
+                <div class="login_right">
+                    <input type="text" placeholder="请输入手机号" id="phone">
+                </div>
+            </div>
+            <div class="login_article">
+                <div class="login_left">
+                    <span>* </span><span>密码</span>
+                </div>
+                <div class="login_right">
+                    <input type="password" placeholder="请输入密码" id="password">
+                </div>
+            </div>
+            <button class="login_btn">登 &nbsp;&nbsp;录</button>
+        </div>
+        <!--  提示框区域   -->
+        <div class="prompt_box">
+            <p></p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    function promptBox(val){
+        $('.prompt_box').show();
+        $('.prompt_box>p').html(val);
+       setTimeout(function () {
+            $('.prompt_box').hide();
+        },1000);
+    }
+    $(function () {
+        //登录
+        $('.login_btn').click(function () {
+            var phone=$('#phone').val().trim();
+            var password=$('#password').val().trim();
+            if(!(/^1[3456789]\d{9}$/.test(phone))){
+                promptBox('手机号码有误');
+                return false;
+            }
+            if(!(/^.{6,18}$/.test(password))){
+                promptBox('密码错误6-15位字符');
+                return false;
+            }
+            window.location.href = "index.html";
+        })
+    })
+</script>
+</html>
