@@ -39,7 +39,7 @@
                    </div>
                    <div class="text">
                        <p>真实姓名</p>
-                       <p>王志远</p>
+                       <p class="user_name">王志远</p>
                    </div>
                </div>
                <div class="article_box">
@@ -48,7 +48,7 @@
                    </div>
                    <div class="text">
                        <p>手机号</p>
-                       <p>188888888888</p>
+                       <p class="user_phone">188888888888</p>
                    </div>
                </div>
                <div class="article_box">
@@ -57,7 +57,7 @@
                    </div>
                    <div class="text">
                        <p>身份证号</p>
-                       <p>21142219984165679</p>
+                       <p class="user_id_card">21142219984165679</p>
                    </div>
                </div>
            </div>
@@ -65,4 +65,16 @@
    </div>
 </div>
 </body>
+<script type="text/javascript" src="../../static/js/common/token.js"></script>
+<script type="text/javascript" src="../../static/js/common/localStorage.js"></script>
+<script type="text/javascript">
+    var personal_data=localStorageGet('personal_data');
+    token('../../login.html');
+    function personal(){
+        $('.user_name').text(personal_data.user_name);
+        $('.user_phone').text(personal_data.user_phone);
+        $('.user_id_card').text(personal_data.user_id_card);
+    }
+    personal();
+</script>
 </html>

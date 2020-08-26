@@ -95,36 +95,42 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="../../static/js/common/image.js"></script>
+<script type="text/javascript" src="../../static/js/common/token.js"></script>
+<script type="text/javascript" src="../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
-    $(function () {
-        $('.name').click(function () {
-            $('.prompt_alert').show();
-             return false;
-        })
-    });
-    function shutDown() {
-        $('.prompt_alert').hide();
-    }
-    function promptBox(val){
-        $('.prompt_box').show();
-        $('.prompt_box>p').html(val);
-        setTimeout(function () {
-            $('.prompt_box').hide();
-        },1000);
-    }
-    //关闭X
-    $('.alert_herder>p:nth-child(3)').click(function () {
-        shutDown()
-    });
-    //取消
-    $('.alert_footer>button:nth-child(1)').click(function () {
-        shutDown();
-        promptBox('您已取消')
-    });
-    //确认
-    $('.alert_footer>button:nth-child(2)').click(function () {
-        shutDown();
-        promptBox('修改成功')
-    })
+    var personal_data=localStorageGet('personal_data');
+    token('../../login.html');
+    echoImg(".image>img",personal_data.user_image);
+    // $(function () {
+    //     $('.name').click(function () {
+    //         $('.prompt_alert').show();
+    //          return false;
+    //     })
+    // });
+    // function shutDown() {
+    //     $('.prompt_alert').hide();
+    // }
+    // function promptBox(val){
+    //     $('.prompt_box').show();
+    //     $('.prompt_box>p').html(val);
+    //     setTimeout(function () {
+    //         $('.prompt_box').hide();
+    //     },1000);
+    // }
+    // //关闭X
+    // $('.alert_herder>p:nth-child(3)').click(function () {
+    //     shutDown()
+    // });
+    // //取消
+    // $('.alert_footer>button:nth-child(1)').click(function () {
+    //     shutDown();
+    //     promptBox('您已取消')
+    // });
+    // //确认
+    // $('.alert_footer>button:nth-child(2)').click(function () {
+    //     shutDown();
+    //     promptBox('修改成功')
+    // })
 </script>
 </html>

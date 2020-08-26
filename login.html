@@ -9,66 +9,105 @@
     <link rel="stylesheet" href="static/css/layouts/layouts.css"/>
     <link rel="stylesheet" href="static/css/common/footer.css"/>
     <link rel="stylesheet" href="static/css/login.css">
+    <link rel="stylesheet" href="static/css/common/logoding.css">
     <script type="text/javascript" src="static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="static/js/plugins/rem.js"></script>
 </head>
 <body>
-    <div class="login">
-        <!--  logo区域    -->
-        <div class="login_content">
-                <div class="login_img">
-                    <img src="static/img/login.png" alt="">
-                    <p>可立刻</p>
-                </div>
-            </div>
-        <!--   表单登录区域   -->
-        <div class="login_box">
-            <div class="login_article">
-                <div class="login_left">
-                    <span>* </span><span>手机号</span>
-                </div>
-                <div class="login_right">
-                    <input type="text" placeholder="请输入手机号" id="phone">
-                </div>
-            </div>
-            <div class="login_article">
-                <div class="login_left">
-                    <span>* </span><span>密码</span>
-                </div>
-                <div class="login_right">
-                    <input type="password" placeholder="请输入密码" id="password">
-                </div>
-            </div>
-            <button class="login_btn">登 &nbsp;&nbsp;录</button>
-        </div>
-        <!--  提示框区域   -->
-        <div class="prompt_box">
-            <p></p>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
+<div class="login">
+    <!--  logo区域    -->
+    <div class="login_content">
+        <div class="login_img">
+            <img src="static/img/login.png" alt="">
+            <p>可立刻</p>
         </div>
     </div>
+    <!--   表单登录区域   -->
+    <div class="login_box">
+        <div class="login_article">
+            <div class="login_left">
+                <span>* </span><span>手机号</span>
+            </div>
+            <div class="login_right">
+                <input type="text" placeholder="请输入手机号" id="phone">
+            </div>
+        </div>
+        <div class="login_article">
+            <div class="login_left">
+                <span>* </span><span>密码</span>
+            </div>
+            <div class="login_right">
+                <input type="password" placeholder="请输入密码" id="password">
+            </div>
+        </div>
+        <button class="login_btn">登 &nbsp;&nbsp;录</button>
+    </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
+    </div>
+</div>
 </body>
+<script type="text/javascript" src="static/js/common/alrte.js"></script>
+<script type="text/javascript" src="static/js/common/localStorage.js"></script>
 <script type="text/javascript">
-    function promptBox(val){
-        $('.prompt_box').show();
-        $('.prompt_box>p').html(val);
-       setTimeout(function () {
-            $('.prompt_box').hide();
-        },1000);
-    }
     $(function () {
         //登录
         $('.login_btn').click(function () {
-            var phone=$('#phone').val().trim();
-            var password=$('#password').val().trim();
-            if(!(/^1[3456789]\d{9}$/.test(phone))){
+            var phone = $('#phone').val().trim();
+            var password = $('#password').val().trim();
+            if (!(/^1[3456789]\d{9}$/.test(phone))) {
                 promptBox('手机号码有误');
                 return false;
             }
-            if(!(/^.{6,18}$/.test(password))){
+            if (!(/^.{6,18}$/.test(password))) {
                 promptBox('密码错误6-15位字符');
                 return false;
             }
-            window.location.href = "index.html";
+            var data={
+                username:phone,
+                password:password
+            };
+            var api="http://192.168.1.109:8080";
+            $.ajax({
+                url:api+"/erp/login" ,
+                type:"POST" ,
+                dataType:"json",
+                header: {
+                    'content-type':  'application/x-www-form-urlencoded'
+                },
+                data:data,
+                beforeSend:function(){
+                    $('.logoding').show();
+                },
+                success:function (data) {
+                    if(data.code==200){
+                        promptBox("登陆成功");
+                        window.location.href = "index.html";
+                        localStorageSet('access_token',data.data.access_token);
+                        localStorageSet('personal_data',data.data);
+                        $('.logoding').hide();
+                    }else {
+                        promptBox(data.msg);
+                        $('.logoding').hide();
+                    }
+                },
+                error:function () {
+                    promptBox("出错啦...");
+                    $('.logoding').hide();
+                },
+            });
         })
     })
 </script>

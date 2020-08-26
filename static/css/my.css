@@ -18,7 +18,8 @@
 }
 .head_portrait_img{
     border-radius: 50%;
-    width: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
     border: .06rem solid #fff;
     margin-right: .4rem;
     background: #fff;

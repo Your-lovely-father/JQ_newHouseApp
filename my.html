@@ -67,7 +67,7 @@
                    </a>
                </li>
                <li>
-                   <a href="">
+                   <a href="#" class="quit">
                        <span class="iconfont icon-tuichu2"></span>
                        <p>退出登陆</p>
                    </a>
@@ -200,7 +200,23 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="static/js/common/image.js"></script>
+<script type="text/javascript" src="static/js/common/token.js"></script>
+<script type="text/javascript" src="static/js/common/localStorage.js"></script>
 <script type="text/javascript">
-
+    var personal_data=localStorageGet('personal_data');
+    token('login.html');
+    echoImg(".head_portrait_img>img",personal_data.user_image);
+    function userName(){
+        $('.head_portrait_text>p:nth-child(1)').text(personal_data.user_name);
+    }
+    userName();
+    $(function () {
+        $('.quit').click(function () {
+            window.localStorage.clear();
+            window.location.href='login.html';
+            return false;
+        })
+    })
 </script>
 </html>
