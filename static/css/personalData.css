@@ -9,7 +9,9 @@
 }
 .head_portrait_box{
     width:100%;
-    padding-top: .6rem;
+    padding: .3rem .4rem 0 .4rem;
+    box-sizing: border-box;
+    margin-left: .26rem;
 }
 .image>img{
     width: 100%;
@@ -29,6 +31,7 @@
 label{
     width: 2rem;
     position: relative;
+    top: .3rem;
     display: block;
     margin: 0 auto;
 }

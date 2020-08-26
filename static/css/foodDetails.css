@@ -25,11 +25,13 @@
     width: .5rem;
     height: .5rem;
     text-align: center;
+    -webkit-appearance:checkbox;
+
 }
-.choose>p>input[type="checkbox"]:checked::before{
-    content: "\2713";color:#e50232;
-    font-weight: bold;
-}
+/*.choose>p>input[type="checkbox"]:checked::before{*/
+/*    content: "\2713";color:#e50232;*/
+/*    font-weight: bold;*/
+/*}*/
 .choose{
     display: flex;
 }

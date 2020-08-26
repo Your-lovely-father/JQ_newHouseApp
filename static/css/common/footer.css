@@ -175,7 +175,7 @@
 }
 
 .right_price > p:nth-child(1) > span {
-    font-size: .1rem;
+    font-size: .3rem;
 }
 
 .right_price > p:nth-child(1) {
@@ -185,9 +185,6 @@
 }
 .right_price>p:nth-child(2){
     font-size: .35rem;
-}
-.right_price > p:nth-child(2) > sup {
-    font-size: .1rem;
 }
 .right_servant {
     width: 100%;
