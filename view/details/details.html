@@ -284,7 +284,7 @@
             </ul>
         </div>
         <div class="btn_fu">
-            <a href="../../spread.html">
+            <a href="javascript:;">
                 立即推荐
             </a>
         </div>
@@ -494,6 +494,20 @@
                         <p>电话</p>
                     </a>
                     `);
+                    //推荐
+                    $('.btn_fu>a').click(function () {
+                        if(which=='collection'||which=='index'||which=='building' || which=='housing' || which=='likeHousing'){
+                            var recommendedBuilding={
+                                id:all.id,
+                                building_name:all.building_name,
+                                province_id:all.province_id,
+                                city_id:all.city_id,
+                                area_id:all.area_id
+                            };
+                            localStorageSet('recommendedBuilding',recommendedBuilding);
+                            window.location.href='../../spread.html'
+                        }
+                    });
                     $('.logoding').hide();
                 } else {
                     promptBox(data.msg);
@@ -530,7 +544,6 @@
                        var all=data.data.data;
                        for(var i=0;i<all.length;i++){
                           var collectionId=all[i].id;
-                           console.log(collectionId==id)
                           if(id == collectionId){
                               $('.fu>ul>li:nth-child(2)>a>span').addClass('activeIcon');
                           }
@@ -620,6 +633,6 @@
                 }
             }
         })
-    })
+    });
 </script>
 </html>

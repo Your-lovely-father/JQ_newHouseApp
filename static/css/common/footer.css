@@ -272,13 +272,13 @@
     height: .9rem;
 }
 .con{
-    display: none;
     width: 100%;
     background: #fff;
     box-shadow: 0 0 3px 1px #eee;
     border-radius: 0.2rem;
     padding: .4rem;
     box-sizing: border-box;
+    margin-bottom: .4rem;
 }
 .con_content{
     width: 100%;
@@ -295,9 +295,6 @@
     font-size: .4rem;
     font-weight: bold;
     color: #474747;
-}
-.on{
-    display: block;
 }
 /*
  列表样式

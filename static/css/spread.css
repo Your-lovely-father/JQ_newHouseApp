@@ -190,7 +190,7 @@
     box-sizing: border-box;
 }
 .alert_content>p{
-    padding: 0 .1rem  .1rem .1rem;
+    padding: 0 .2rem  .05rem .2rem;
     border-radius: .2rem;
     font-size: .2rem;
     margin-top: .2rem;
@@ -271,7 +271,7 @@
     box-sizing: border-box;
 }
 .purchas_content>p{
-    padding: .05rem .4rem;
+    padding: .05rem .36rem;
     border-radius: .2rem;
     font-size: .2rem;
     margin-top: .2rem;

@@ -8,11 +8,23 @@
 <link rel="stylesheet" href="../../static/css/libs/font/iconfont.css">
 <link rel="stylesheet" href="../../static/css/layouts/layouts.css"/>
 <link rel="stylesheet" href="../../static/css/common/footer.css"/>
+<link rel="stylesheet" href="../../static/css/common/logoding.css">
 <link rel="stylesheet" href="../../static/css/recommended.css"/>
 <script type="text/javascript" src="../../static/js/plugins/jquery.min.js"></script>
 <script type="text/javascript" src="../../static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="recommended">
     <!--  头部   -->
     <div class="head_nav">
@@ -29,7 +41,7 @@
     <!--  搜索样式  -->
     <div class="search">
         <span class="iconfont icon-sousuo"></span>
-        <input type="text" placeholder="请输入客户名称">
+        <input type="text" placeholder="请输入客户名称" class="client_name">
     </div>
     <!--  选项卡 -->
     <ul class="nav">
@@ -38,82 +50,121 @@
         <li>已签约</li>
     </ul>
     <div class="switch_content">
-        <div class="on con">
-            <div class="con_content">
-                <p>客户名称</p>
-                <p>奥特曼</p>
-            </div>
-            <div class="con_content">
-                <p>电话</p>
-                <p>13464785787</p>
-            </div>
-            <div class="con_content">
-                <p>意向楼盘</p>
-                <p>外太空</p>
-            </div>
-            <div class="con_content">
-                <p>销售姓名</p>
-                <p>待分配</p>
-            </div>
-            <div class="con_content">
-                <p>销售电话</p>
-                <p>待分配</p>
-            </div>
-        </div>
-        <div class="con">
-            <div class="con_content">
-                <p>客户名称</p>
-                <p>奥特之父</p>
-            </div>
-            <div class="con_content">
-                <p>电话</p>
-                <p>13464785787</p>
-            </div>
-            <div class="con_content">
-                <p>意向楼盘</p>
-                <p>外太空</p>
-            </div>
-            <div class="con_content">
-                <p>销售姓名</p>
-                <p>待分配</p>
-            </div>
-            <div class="con_content">
-                <p>销售电话</p>
-                <p>待分配</p>
-            </div>
-        </div>
-        <div class="con">
-            <div class="con_content">
-                <p>客户名称</p>
-                <p>奥特之母</p>
-            </div>
-            <div class="con_content">
-                <p>电话</p>
-                <p>13464785787</p>
-            </div>
-            <div class="con_content">
-                <p>意向楼盘</p>
-                <p>外太空</p>
-            </div>
-            <div class="con_content">
-                <p>销售姓名</p>
-                <p>待分配</p>
-            </div>
-            <div class="con_content">
-                <p>销售电话</p>
-                <p>待分配</p>
-            </div>
-        </div>
+<!--        <div class="con">-->
+<!--            <div class="con_content">-->
+<!--                <p>客户名称</p>-->
+<!--                <p>奥特曼</p>-->
+<!--            </div>-->
+<!--            <div class="con_content">-->
+<!--                <p>电话</p>-->
+<!--                <p>13464785787</p>-->
+<!--            </div>-->
+<!--            <div class="con_content">-->
+<!--                <p>意向楼盘</p>-->
+<!--                <p>外太空</p>-->
+<!--            </div>-->
+<!--            <div class="con_content">-->
+<!--                <p>销售姓名</p>-->
+<!--                <p>待分配</p>-->
+<!--            </div>-->
+<!--            <div class="con_content">-->
+<!--                <p>销售电话</p>-->
+<!--                <p>待分配</p>-->
+<!--            </div>-->
+<!--        </div>-->
+    </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
     </div>
 </div>
 </body>
+<script type="text/javascript" src="../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../static/js/common/api.js"></script>
+<script type="text/javascript" src="../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
+    access_token=localStorageGet('access_token');
+    fondList={
+        page:1,
+        offset:999,
+        client_name:'',
+        visit_type:''
+    };
+    _this=this;
     $(function () {
-        //选项卡功能
-        $(".nav li").click(function() {
-            $(".nav li").eq($(this).index()).addClass("act").siblings().removeClass('act');
-            $(".switch_content>div").hide().eq($(this).index()).show();
+        //input 搜索楼盘
+        $('.client_name').keyup(function(event){
+            var int = $('.client_name').val();
+            if(event.keyCode ==13){
+                _this.fondList.client_name = int;
+                fond()
+            }
         });
-    })
+    });
+    $(function () {
+            $(".nav li").click(function() {
+                $(this).addClass("act").siblings().removeClass('act');
+                var screening= $(this).text();
+                if(screening=='未访问'){
+                    fondList.visit_type=10;
+                    fond()
+                }
+                if(screening=='已访问'){
+                    fondList.visit_type=20;
+                    fond()
+                }
+                if(screening=='已签约'){
+                    fondList.visit_type=30;
+                    fond()
+                }
+            });
+    });
+    function fond() {
+        $.ajax({
+            url:api+"/api/get_intention_list" ,
+            type:"POST" ,
+            dataType:"json",
+            headers: {
+                'access-token':access_token
+            },
+            data:fondList,
+            beforeSend:function(){
+                $('.logoding').show();
+            },
+            success:function (data) {
+                if(data.code==200){
+                    var all=data.data.data;
+                    var str='';
+                    for(var i = 0; i < all.length; i++){
+                        str+=`
+                        <div class="con">
+                                <div class="con_content">
+                                    <p>客户名称</p>
+                                    <p>${all[i].client_name}</p>
+                                </div>
+                                <div class="con_content">
+                                    <p>意向楼盘</p>
+                                    <p>${all[i].building_name}</p>
+                                </div>
+                                <div class="con_content">
+                                    <p>维护人</p>
+                                    <p>${all[i].user_name}</p>
+                                </div>
+                            </div>
+                        `;
+                    }
+                    $('.switch_content').html(str);
+                    $('.logoding').hide();
+                }else {
+                    $('.logoding').hide();
+                }
+            },
+            error:function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
+    }
+    fond()
 </script>
 </html>

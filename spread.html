@@ -10,11 +10,23 @@
     <link rel="stylesheet" href="static/css/layouts/layouts.css"/>
     <link rel="stylesheet" href="static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="static/css/common/footer.css">
+    <link rel="stylesheet" href="static/css/common/logoding.css">
     <link rel="stylesheet" href="static/css/spread.css">
     <script type="text/javascript" src="static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="spread">
     <div class="spread_box">
         <div class="basic_information">
@@ -50,7 +62,7 @@
                             <span class="iconfont icon-ziyuan"></span>
                             <p>意向楼盘</p>
                         </div>
-                        <a href="view/like/like.html" class="customer_right">
+                        <a href="javascript:;" class="customer_right">
                             <p class="like">请选择意向楼盘</p>
                             <span class="iconfont icon-iconfonti"></span>
                         </a>
@@ -68,10 +80,10 @@
                     <li>
                         <div class="customer_left">
                             <span class="iconfont icon-tubiao_xuqiu"></span>
-                            <p>购房需求</p>
+                            <p>客户类型</p>
                         </div>
                         <div class="customer_right _demand">
-                            <p class="demand">请选择购房需求</p>
+                            <p class="demand">请选择客户类型</p>
                             <span class="iconfont icon-iconfonti"></span>
                         </div>
                     </li>
@@ -95,11 +107,7 @@
                 <p>X</p>
             </div>
             <div class="alert_content">
-                <p>120-180m <sup>2</sup></p>
-                <p>120-181m <sup>2</sup></p>
-                <p>120-182m <sup>2</sup></p>
-                <p>120-183m <sup>2</sup></p>
-                <p>120-184m <sup>2</sup></p>
+<!--                <p>120-180m <sup>2</sup></p>-->
             </div>
             <div class="alert_footer">
                 <button>取消</button>
@@ -112,16 +120,16 @@
         <div class="purchas_box">
             <div class="purchas_herder">
                 <p></p>
-                <p>购房需求</p>
+                <p>客户类型</p>
                 <p>X</p>
             </div>
             <div class="purchas_content">
-                <p>刚需</p>
-                <p>婚房</p>
-                <p>教育</p>
-                <p>投资</p>
-                <p>改善</p>
-                <p>其他</p>
+<!--                <p>刚需</p>-->
+<!--                <p>婚房</p>-->
+<!--                <p>教育</p>-->
+<!--                <p>投资</p>-->
+<!--                <p>改善</p>-->
+<!--                <p>其他</p>-->
             </div>
             <div class="purchas_footer">
                 <button>取消</button>
@@ -168,8 +176,16 @@
             </li>
         </ul>
     </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
+    </div>
 </div>
 </body>
+<script type="text/javascript" src="static/js/common/alrte.js"></script>
+<script type="text/javascript" src="static/js/common/api.js"></script>
+<script type="text/javascript" src="static/js/common/token.js"></script>
+<script type="text/javascript" src="static/js/common/localStorage.js"></script>
 <script type="text/javascript">
     jeDate({
         dateCell: "#dateTime",
@@ -182,15 +198,82 @@
     var date = new Date();
     var dateString = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + "  " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     mydateInput.value = dateString;
-
+    token('login.html');
+    recommendedBuilding=localStorageGet('recommendedBuilding');
+    access_token=localStorageGet('access_token');
+    personal_data=localStorageGet('personal_data');
+    mId=''; //意向面积id
+    category='';//客户类别id
     $(function () {
-        function promptBox(val) {
-            $('.prompt_box').show();
-            $('.prompt_box>p').html(val);
-            setTimeout(function () {
-                $('.prompt_box').hide();
-            }, 1000);
-        }
+        $('.like').text(recommendedBuilding.building_name);
+        //意向面积
+        var meters={
+            page:1,
+            offset:999
+        };
+        $.ajax({
+            url:api+"/erp/get_acreage_list" ,
+            type:"POST" ,
+            dataType:"json",
+            headers: {
+                'access-token':access_token
+            },
+            data:meters,
+            beforeSend:function(){
+                $('.logoding').show();
+            },
+            success:function (data) {
+                if(data.code==200){
+                    var all=data.data;
+                    var str='';
+                    for(var i=0;i<all.length;i++){
+                        str+=`
+                            <p>${all[i].acreage_num}m<sup>2</sup></p>
+                        `;
+                    }
+                    $('.alert_content').html(str);
+                    $('.logoding').hide();
+                }else {
+                    $('.logoding').hide();
+                }
+            },
+            error:function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
+        //客户类型
+        $.ajax({
+            url:api+"/erp/get_client_type_list" ,
+            type:"POST" ,
+            dataType:"json",
+            headers: {
+                'access-token':access_token
+            },
+            data:meters,
+            beforeSend:function(){
+                $('.logoding').show();
+            },
+            success:function (data) {
+                if(data.code==200){
+                    var all=data.data;
+                    var str='';
+                    for(var i=0;i<all.length;i++){
+                        str+=`
+                             <p>${all[i].type_name}</p>
+                        `;
+                    }
+                    $('.purchas_content').html(str);
+                    $('.logoding').hide();
+                }else {
+                    $('.logoding').hide();
+                }
+            },
+            error:function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
         //推荐
         $('.recommend_btn>button').click(function () {
             var user = $('.user').val().trim();
@@ -220,15 +303,56 @@
                 promptBox('请选择意向面积');
                 return false;
             }
-            if (demand=='请选择购房需求') {
-                promptBox('请选择购房需求');
+            if (demand=='请选择客户类型') {
+                promptBox('请选择客户类型');
                 return false;
             }
             if (!remarks_int) {
                 promptBox('请输入备注信息');
                 return false;
             }
-            promptBox('推荐成功');
+            var customer={
+                client_name:user,
+                client_phone:phone,
+                reported_time:dateTime,
+                user_id:personal_data.id,
+                province_id:recommendedBuilding.province_id,
+                city_id:recommendedBuilding.city_id,
+                area_id:recommendedBuilding.area_id,
+                storefront_id:personal_data.storefront_id,
+                remarks:remarks_int,
+                client_type:mId,
+                building_id:recommendedBuilding.id,
+                acreage_id:category
+            };
+            $.ajax({
+                url:api+"/api/client_report_mobile_add" ,
+                type:"POST" ,
+                dataType:"json",
+                headers: {
+                    'access-token':access_token
+                },
+                data:customer,
+                beforeSend:function(){
+                    $('.logoding').show();
+                },
+                success:function (data) {
+                    if(data.code=="200001"){
+                        promptBox('推荐成功');
+                        $('.logoding').hide();
+                        window.location.href='view/recommended/recommended.html';
+                        $('.like').text('请选择意向楼盘');
+                        localStorageDel('recommendedBuilding')
+                    }else {
+                        promptBox('推荐失败');
+                        $('.logoding').hide();
+                    }
+                },
+                error:function () {
+                    promptBox("出错啦...");
+                    $('.logoding').hide();
+                },
+            });
         });
         //意向面积操作
         function shutDown() {
@@ -249,20 +373,44 @@
         $('.alert_footer>button:nth-child(2)').click(function () {
             shutDown();
         });
-        var metreArr=[];
-        $(".alert_content p").click(function() {
-            $(this).toggleClass("active1");
+        metreArr='';
+        $(".alert_content").on('click','p',function() {
+            $(this).addClass("active1").siblings().removeClass('active1');
             var flag=$(this).hasClass('active1');
             if(flag){
-                metreArr.push($(this).html()) ;
-            }else {
-                metreArr.splice($(this).html(),1);
+                metreArr=$(this).html();
+                var meters={
+                    page:1,
+                    offset:999
+                };
+                $.ajax({
+                    url:api+"/erp/get_acreage_list" ,
+                    type:"POST" ,
+                    dataType:"json",
+                    headers: {
+                        'access-token':access_token
+                    },
+                    data:meters,
+                    success:function (data) {
+                        if(data.code==200){
+                            var all=data.data;
+                            for(var i=0;i<all.length;i++){
+                                if(metreArr.split('m')[0].trim()==all[i].acreage_num){
+                                    mId=all[i].id
+                                }
+                            }
+                        }
+                    },
+                    error:function () {
+                        promptBox("出错啦...");
+                    },
+                });
             }
         });
         //选好了
         $(".alert_footer>button:nth-child(2)").click(function () {
             if(metreArr.length>0){
-                $('.rice').html(metreArr.join(','))
+                $('.rice').html(metreArr)
             }else {
                 $('.rice').text('请选择意向面积')
             }
@@ -286,22 +434,47 @@
         $('.purchas_footer>button:nth-child(2)').click(function () {
             purchasDown();
         });
-        var purchasArr=[];
-        $(".purchas_content p").click(function() {
-            $(this).toggleClass("active2");
+        purchasArr='';
+        $(".purchas_content").on('click','p',function() {
+            $(this).addClass("active2").siblings().removeClass('active2');
             var flag=$(this).hasClass('active2');
             if(flag){
-                purchasArr.push($(this).html()) ;
-            }else {
-                purchasArr.splice($(this).html(),1);
+                purchasArr=$(this).html() ;
+
             }
         });
         //选好了
         $(".purchas_footer>button:nth-child(2)").click(function () {
             if(purchasArr.length>0){
-                $('.demand').html(purchasArr.join(','))
+                $('.demand').html(purchasArr);
+                var meters={
+                    page:1,
+                    offset:999
+                };
+                $.ajax({
+                    url:api+"/erp/get_client_type_list" ,
+                    type:"POST" ,
+                    dataType:"json",
+                    headers: {
+                        'access-token':access_token
+                    },
+                    data:meters,
+                    success:function (data) {
+                        if(data.code==200){
+                            var all=data.data;
+                            for(var i=0;i<all.length;i++){
+                                if(purchasArr==all[i].type_name){
+                                    category=all[i].id
+                                }
+                            }
+                        }
+                    },
+                    error:function () {
+                        promptBox("出错啦...");
+                    },
+                });
             }else {
-                $('.demand').text('请选择购房需求')
+                $('.demand').text('请选择客户类型')
             }
         })
 
