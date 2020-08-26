@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../static/css/layouts/layouts.css" />
     <link rel="stylesheet" href="../../static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="../../static/css/common/footer.css">
+    <link rel="stylesheet" href="../../static/css/common/logoding.css">
     <link rel="stylesheet" href="../../static/css/customer.css">
     <script type="text/javascript" src="../../static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="../../static/js/plugins/rem.js"></script>
@@ -19,7 +20,17 @@
     </style>
 </head>
 <body>
-
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="customer">
     <!--  头部   -->
     <div class="head_nav">
@@ -38,111 +49,85 @@
         <!--  搜索样式  -->
         <div class="search">
             <span class="iconfont icon-sousuo"></span>
-            <input type="text" placeholder="请输入客户名称">
+            <input type="text" placeholder="请输入客户名称" class="client_name">
         </div>
         <div class="client_each_box">
             <div class="client_each_box_tile">
-                <p>意向楼盘</p>
+                <p>客户姓名</p>
                 <p>时间</p>
             </div>
             <div class="client_each">
-                <a href="foodDetails/foodDetails.html">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>恒大冰泉</p>
-                    <p>2020-80-20</p>
-                </a>
+<!--                <a href="foodDetails/foodDetails.html">-->
+<!--                    <p>恒大冰泉</p>-->
+<!--                    <p>2020-80-20</p>-->
+<!--                </a>-->
             </div>
         </div>
     </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
+    </div>
 </div>
 </body>
+<script type="text/javascript" src="../../static/js/common/image.js"></script>
+<script type="text/javascript" src="../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../static/js/common/api.js"></script>
+<script type="text/javascript" src="../../static/js/common/localStorage.js"></script>
+<script type="text/javascript">
+    access_token=localStorageGet('access_token');
+    fondList={
+        page:1,
+        offset:999,
+        client_name:'',
+    };
+    _this=this;
+    $(function () {
+        //input 搜索楼盘
+        $('.client_name').keyup(function(event){
+            var int = $('.client_name').val();
+            if(event.keyCode ==13){
+                _this.fondList.client_name = int;
+                fond()
+            }
+        });
+    });
+    function fond() {
+        $.ajax({
+            url:api+"/erp/get_intention_list" ,
+            type:"POST" ,
+            dataType:"json",
+            headers: {
+                'access-token':access_token
+            },
+            data:fondList,
+            beforeSend:function(){
+                $('.logoding').show();
+            },
+            success:function (data) {
+                if(data.code==200){
+                    var all=data.data.data;
+                    var str='';
+                    for(var i = 0; i < all.length; i++){
+                        str+=`
+                         <a href=${'foodDetails/foodDetails.html?id='+all[i].id+'&area_name='+all[i].area_name+'&client_name='+all[i].client_name+'&user_name='+all[i].user_name}>
+                            <p>${all[i].client_name}</p>
+                            <p>${all[i].update_time}</p>
+                        </a>
+                        `;
+                    }
+                    $('.client_each').html(str);
+                    $('.logoding').hide();
+                }else {
+                    $('.logoding').hide();
+                }
+            },
+            error:function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
+    }
+    fond()
+</script>
 </html>

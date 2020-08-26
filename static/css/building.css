@@ -12,15 +12,15 @@
 
 .search_area {
     width: 100%;
-    align-items: center;
     padding: .5rem .4rem;
     box-sizing: border-box;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 
 .search_area_left {
-    width: 16%;
+    width: 20%;
     display: flex;
     height: 1rem;
     align-items: center;
@@ -34,10 +34,13 @@
 .search_area_left > p {
     font-size: .45rem;
     color: #333;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
 }
 
 .search_area_right {
-    width: 83%;
+    width: 78%;
     height: 0.9rem;
     background: #efefef;
     border-radius: .5rem;
@@ -47,9 +50,8 @@
     color: #9fa3a5;
     margin-left: 0.4rem;
 }
-
 .search_area_right > input {
-    width: 86%;
+    width: 85%;
     color: #9fa3a5;
     height: 0.9rem;
     padding-left: 0.1rem;
@@ -105,16 +107,30 @@
     box-sizing: border-box;
     background: #fff;
     display: flex;
+    flex-flow: wrap;
+}
+.active1{
+    background: #f5c3c6;
+    color: red !important;
+}
+.activeColor{
+    color: red !important;
 }
 .orientation>li>p{
-    width: 1rem;
+    width: 1.5rem;
+    height: .5rem;
+    line-height: .5rem;
     text-align: center;
-    background: #f5c3c6;
-    padding: .1rem .2rem;
-    color: red;
+    padding: .05rem .1rem;
     font-size: .3rem;
     border-radius: .2rem;
     margin-right: 0.2rem;
+    margin-top: .2rem;
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+    color: #f5c3c6;
+    border: 1px solid #f5c3c6;
 }
 .sort{
     width: 100%;
@@ -155,21 +171,9 @@
     background: #fff;
     display: flex;
 }
-.type_model>li>p:nth-child(1){
-    width: 1rem;
-    text-align: center;
-    background: #f5c3c6;
-    padding: .08rem .2rem;
-    color: red;
-    font-size: .3rem;
-    border-radius: .2rem;
-    margin-right: 0.3rem;
-    border: 1px solid #f5c3c6;
-}
 .type_model>li>p{
     width: 1rem;
     text-align: center;
-    background: #fff;
     padding: .08rem .2rem;
     color: #f5c3c6;
     font-size: .3rem;
@@ -195,20 +199,8 @@
     display: flex;
     flex-flow: wrap;
 }
-.acreage>li>p:nth-child(1){
-    text-align: center;
-    background: #f5c3c6;
-    padding: 0 .2rem .05rem .2rem;
-    color: red;
-    font-size: .3rem;
-    border-radius: .2rem;
-    margin-right: 0.3rem;
-    border: 1px solid #f5c3c6;
-    margin-top: 0.3rem;
-}
 .acreage>li>p{
     text-align: center;
-    background: #fff;
     padding: 0 .2rem .05rem .2rem;
     color: #f5c3c6;
     font-size: .3rem;
@@ -301,6 +293,9 @@
     box-sizing: border-box;
     color: #666666;
 }
-.letter>a>.border{
+.letter>a>p:nth-child(n+2){
     border-bottom: 1px solid #cccccc;
+}
+.letter>a>p:last-child{
+    border-bottom:none;
 }

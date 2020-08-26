@@ -9,11 +9,23 @@
     <link rel="stylesheet" href="../../../static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="../../../static/css/layouts/layouts.css"/>
     <link rel="stylesheet" href="../../../static/css/common/footer.css"/>
+    <link rel="stylesheet" href="../../../static/css/common/logoding.css">
     <link rel="stylesheet" href="../../../static/css/foodDetails.css"/>
     <script type="text/javascript" src="../../../static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="../../../static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="foodDetails">
     <!--  头部   -->
     <div class="head_nav">
@@ -31,25 +43,104 @@
     <div class="food_form">
         <div class="form_box">
             <p>区域:</p>
-            <input type="text" value="北京/北京市/朝阳区"/>
+            <input type="text" class="area_name"/>
         </div>
         <div class="form_box">
             <p>维护人:</p>
-            <input type="text" value="王文月"/>
+            <input type="text" class="client_name"/>
         </div>
         <div class="form_box">
             <p>客户名称:</p>
-            <input type="text" value="赵晓磊"/>
+            <input type="text" class="user_name"/>
         </div>
         <div class="form_box">
             <p>意向楼盘:</p>
-            <input type="text" value="月亮湾"/>
+            <input type="text" class="building_name"/>
         </div>
+    </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
     </div>
 </div>
 </body>
+<script type="text/javascript" src="../../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../../static/js/common/api.js"></script>
+<script type="text/javascript" src="../../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
-
+$(function () {
+    access_token = localStorageGet('access_token');
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return decodeURI(r[2]) ;
+        return null; //返回参数值
+    }
+    //接收URL中的参数id
+    var id = getUrlParam('id');
+    area_name = getUrlParam('area_name');
+    client_name = getUrlParam('client_name');
+    user_name = getUrlParam('user_name');
+    data = {
+        id: id
+    };
+     $.ajax({
+            url: api + "/erp/intention_detail",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            headers: {
+                'access-token': access_token
+            },
+            beforeSend: function () {
+                $('.logoding').show();
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    var all =data.data;
+                    $('.area_name').val(area_name);
+                    $('.client_name').val(client_name);
+                    $('.user_name').val(user_name);
+                    $('.building_name').val(all.building_name);
+                    $('.logoding').hide();
+                } else {
+                    $('.logoding').hide();
+                }
+            },
+            error: function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
+    $('.head_nav>ul>li:nth-child(3)').click(function () {
+        $.ajax({
+            url: api + "/erp/intention_del",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            headers: {
+                'access-token': access_token
+            },
+            beforeSend: function () {
+                $('.logoding').show();
+            },
+            success: function (data) {
+                if (data.code == '100006') {
+                    $('.logoding').hide();
+                    promptBox('删除成功');
+                    window.location.href='../fond.html';
+                } else {
+                    $('.logoding').hide();
+                    promptBox('删除失败');
+                }
+            },
+            error: function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
+    })
+})
 </script>
-
 </html>

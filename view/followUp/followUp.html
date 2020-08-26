@@ -49,126 +49,50 @@
         <!--  搜索样式  -->
         <div class="search">
             <span class="iconfont icon-sousuo"></span>
-            <input type="text" placeholder="请输入客户名称">
+            <input type="text" placeholder="请输入客户名称" class="client_name">
         </div>
         <div class="client_each_box">
             <div class="client_each_box_tile">
-                <p>跟进记录</p>
+                <p>客户姓名</p>
                 <p>时间</p>
             </div>
             <div class="client_each">
-                <a href="followDetails/followDetails.html">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>天真</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
-            </div>
-            <div class="client_each">
-                <a href="#">
-                    <p>哈哈哈哈哈</p>
-                    <p>2020-80-20</p>
-                </a>
+<!--                <a href="followDetails/followDetails.html">-->
+<!--                    <p>哈哈哈哈哈</p>-->
+<!--                    <p>2020-80-20</p>-->
+<!--                </a>-->
             </div>
         </div>
+    </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
     </div>
 </div>
 </body>
 <script type="text/javascript" src="../../static/js/common/image.js"></script>
 <script type="text/javascript" src="../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../static/js/common/api.js"></script>
 <script type="text/javascript" src="../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
     access_token=localStorageGet('access_token');
-    // cacheData=localStorageGet('personal_data');
-    api="http://192.168.1.108:8080";
+    followList={
+        page:1,
+        offset:999,
+        client_name:'',
+    };
+    _this=this;
     $(function () {
-        var followList={
-            page:1,
-            offset:999,
-            // user_id:cacheData.id,
-        };
+        //input 搜索楼盘
+        $('.client_name').keyup(function(event){
+            var int = $('.client_name').val();
+            if(event.keyCode ==13){
+                _this.followList.client_name = int;
+                follow()
+            }
+        });
+    });
+    function follow() {
         $.ajax({
             url:api+"/erp/get_follow_up_list" ,
             type:"POST" ,
@@ -181,10 +105,18 @@
                 $('.logoding').show();
             },
             success:function (data) {
-                console.log(data);
-                console.log(data.code);
-                console.log(data.data.data);
                 if(data.code==200){
+                    var all=data.data.data;
+                    var str='';
+                    for(var i = 0; i < all.length; i++){
+                        str+=`
+                         <a href=${'followDetails/followDetails.html?id='+all[i].id}>
+                            <p>${all[i].client_name}</p>
+                            <p>${all[i].follow_time}</p>
+                        </a>
+                        `;
+                    }
+                    $('.client_each').html(str);
                     $('.logoding').hide();
                 }else {
                     $('.logoding').hide();
@@ -195,6 +127,7 @@
                 $('.logoding').hide();
             },
         });
-    })
+    }
+    follow()
 </script>
 </html>

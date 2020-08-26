@@ -9,11 +9,23 @@
     <link rel="stylesheet" href="../../../static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="../../../static/css/layouts/layouts.css"/>
     <link rel="stylesheet" href="../../../static/css/common/footer.css"/>
+    <link rel="stylesheet" href="../../../static/css/common/logoding.css">
     <link rel="stylesheet" href="../../../static/css/addLook.css"/>
     <script type="text/javascript" src="../../../static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="../../../static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="addLook">
     <!--  头部   -->
     <div class="head_nav">
@@ -31,19 +43,94 @@
     <div class="form_box">
         <div class="form_dateTime">
             <p>时间:</p>
-            <input type="text" class="form-control input-medium" placeholder="请选择日期时间" name="" id="dateTime" value="2020-9-31 18:35:03"/>
+            <input type="text" class="form-control input-medium" placeholder="请选择日期时间" name="" id="dateTime"/>
         </div>
         <div class="record">
             <p>带看记录</p>
             <div class="textarea_box">
-                <textarea placeholder="请输入带看记录">啦啦啦啦啦</textarea>
+                <textarea placeholder="请输入带看记录"></textarea>
             </div>
         </div>
     </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
+    </div>
 </div>
 </body>
+<script type="text/javascript" src="../../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../../static/js/common/api.js"></script>
+<script type="text/javascript" src="../../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
-
+    $(function () {
+        access_token = localStorageGet('access_token');
+        //获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]);
+            return null; //返回参数值
+        }
+        //接收URL中的参数id
+        var id = getUrlParam('id');
+        var data = {
+            id: id
+        };
+        $.ajax({
+            url: api + "/erp/follow_up_detail",
+            type: "POST",
+            dataType: "json",
+            data: data,
+            headers: {
+                'access-token': access_token
+            },
+            beforeSend: function () {
+                $('.logoding').show();
+            },
+            success: function (data) {
+                if (data.code == 200) {
+                    var all=data.data;
+                    $('#dateTime').val(all.follow_time);
+                    $('.textarea_box>textarea').text(all.record_content);
+                    $('.logoding').hide();
+                } else {
+                    promptBox(data.msg);
+                    $('.logoding').hide();
+                }
+            },
+            error: function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
+        $('.head_nav>ul>li:nth-child(3)').click(function () {
+            $.ajax({
+                url: api + "/erp/follow_up_del",
+                type: "POST",
+                dataType: "json",
+                data: data,
+                headers: {
+                    'access-token': access_token
+                },
+                beforeSend: function () {
+                    $('.logoding').show();
+                },
+                success: function (data) {
+                    if (data.code == '100006') {
+                        promptBox('删除成功');
+                        $('.logoding').hide();
+                        window.location.href='../followUp.html';
+                    } else {
+                        promptBox('删除失败');
+                        $('.logoding').hide();
+                    }
+                },
+                error: function () {
+                    promptBox("出错啦...");
+                    $('.logoding').hide();
+                },
+            });
+        })
+    })
 </script>
-
 </html>
