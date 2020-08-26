@@ -122,6 +122,11 @@
                     var all=data.data.data;
                     var str='';
                     for(var i=0;i<all.length;i++){
+                        for(var key in all[i]){ //处理后台返回的null
+                            if(all[i][key]==null){
+                                all[i][key]=''
+                            }
+                        }
                         str+=`
                          <div class="tabList_box">
                             <div class="tabList_content">

@@ -112,22 +112,21 @@
 .prompt_bottom{
     width: 100%;
     border-top: 1px solid #eee;
-}
-.prompt_bottom{
-    width: 100%;
     display: flex;
-}
-.prompt_bottom>p>a{
-    display: block;
-    color: #c72a23;
 }
 .prompt_bottom>p{
     font-size: .4rem;
     width: 50%;
+    height: 1rem;
+    line-height: 1rem;
     text-align: center;
-    padding: .3rem 0;
     color: #c72a23;
 }
-.prompt_bottom>p:nth-child(1){
-    border-right: 1px solid #eee;
+.prompt_bottom>p>a{
+    font-size: .4rem;
+    width: 100%;
+    text-align: center;
+    color: #c72a23;
+    display: block;
+    border-right: 1px #eee solid;
 }

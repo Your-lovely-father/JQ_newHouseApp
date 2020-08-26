@@ -42,6 +42,8 @@
 .search_area_right {
     width: 78%;
     height: 0.9rem;
+    display: flex;
+    align-items: center;
     background: #efefef;
     border-radius: .5rem;
 }
@@ -51,9 +53,9 @@
     margin-left: 0.4rem;
 }
 .search_area_right > input {
-    width: 85%;
+    width: 80%;
     color: #9fa3a5;
-    height: 0.9rem;
+    /*height: 0.9rem;*/
     padding-left: 0.1rem;
 }
 .tower{
@@ -121,8 +123,8 @@
     height: .5rem;
     line-height: .5rem;
     text-align: center;
-    padding: .05rem .1rem;
-    font-size: .3rem;
+    padding: .05rem .3rem;
+    font-size: .35rem;
     border-radius: .2rem;
     margin-right: 0.2rem;
     margin-top: .2rem;
@@ -149,7 +151,7 @@
     background: #fff;
 }
 .sort>li>p{
-    font-size: .3rem;
+    font-size: .35rem;
     border-bottom: 1px solid #cccccc;
     padding: .2rem 0;
     color: black;
@@ -174,9 +176,9 @@
 .type_model>li>p{
     width: 1rem;
     text-align: center;
-    padding: .08rem .2rem;
+    padding: .05rem .3rem;
     color: #f5c3c6;
-    font-size: .3rem;
+    font-size: .35rem;
     border-radius: .2rem;
     margin-right: 0.3rem;
     border: 1px solid #f5c3c6;
@@ -201,9 +203,9 @@
 }
 .acreage>li>p{
     text-align: center;
-    padding: 0 .2rem .05rem .2rem;
+    padding: 0 .3rem .05rem .3rem;
     color: #f5c3c6;
-    font-size: .3rem;
+    font-size: .35rem;
     border-radius: .2rem;
     margin-right: 0.3rem;
     border: 1px solid #f5c3c6;

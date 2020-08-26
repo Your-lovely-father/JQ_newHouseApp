@@ -96,6 +96,9 @@
             success:function (data) {
                 if(data.code==200){
                     var all=data.data;
+                    if(!all.building){
+                        all.building=''
+                    }
                     $('#dateTime').val(all.look_time);
                     $('.housing').html(`
                      <a href="javascript:;">

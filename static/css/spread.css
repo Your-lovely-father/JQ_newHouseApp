@@ -190,9 +190,9 @@
     box-sizing: border-box;
 }
 .alert_content>p{
-    padding: 0 .2rem  .05rem .2rem;
+    padding: 0 .3rem  .05rem .3rem;
     border-radius: .2rem;
-    font-size: .2rem;
+    font-size: .35rem;
     margin-top: .2rem;
     margin-right: .2rem;
     border: 1px solid #f5c3c6;
@@ -271,9 +271,9 @@
     box-sizing: border-box;
 }
 .purchas_content>p{
-    padding: .05rem .36rem;
+    padding: .05rem .3rem;
     border-radius: .2rem;
-    font-size: .2rem;
+    font-size: .35rem;
     margin-top: .2rem;
     margin-right: .2rem;
     border: 1px solid #f5c3c6;

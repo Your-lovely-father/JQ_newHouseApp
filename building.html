@@ -533,6 +533,11 @@
                         //对数据做遍历，拼接到页面显示
                         var all = data.data.data;
                         for (var i = 0; i < all.length; i++) {
+                            for(var key in all[i]){ //处理后台返回的null
+                                if(all[i][key]==null){
+                                    all[i][key]=''
+                                }
+                            }
                             allTag = all[i].building_type_name.split(',');
                             str += `
                            <div class="tower_content">
@@ -544,9 +549,9 @@
                                     <div class="tower_right">
                                         <div class="right_title">${all[i].building_name}</div>
                                         <div class="right_m">
-                                            <p>${all[i].house_floorage_begin}-${all[i].house_floorage_end}m<sup>2</sup></p>
+                                            <p>${all[i].house_floorage_begin===null?'':all[i].house_floorage_begin}-${all[i].house_floorage_end===null?'':all[i].house_floorage_end}m<sup>2</sup></p>
                                             <p></p>
-                                            <p>${all[i].habitable_begin}-${all[i].habitable_end}室</p>
+                                            <p>${all[i].habitable_begin===null?'':all[i].habitable_begin}-${all[i].habitable_end===null?'':all[i].habitable_begin}室</p>
                                         </div>
                                         <div class="right_area">
 

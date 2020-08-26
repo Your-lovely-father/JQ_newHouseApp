@@ -47,7 +47,7 @@
     <div class="tab">
         <div class="client_each_box">
             <div class="client_each_box_tile">
-                <p>带看记录</p>
+                <p>客户名称</p>
                 <p>时间</p>
             </div>
             <div class="client_each">
@@ -92,7 +92,7 @@
                     for(var i=0;i<all.length;i++){
                         str+=`
                         <a href=${"lookDetails/lookDetails.html?id="+all[i].id}>
-                            <p>${all[i].guide_look_content}</p>
+                            <p>${all[i].client_name}</p>
                             <p>${all[i].look_time}</p>
                         </a>
                         `;

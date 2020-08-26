@@ -275,12 +275,12 @@
                         <p>收藏</p>
                     </a>
                 </li>
-                <li>
-                    <a href="javascript:;">
-                        <span class="iconfont icon-fenxiang1"></span>
-                        <p>分享</p>
-                    </a>
-                </li>
+<!--                <li>-->
+<!--                    <a href="javascript:;">-->
+<!--                        <span class="iconfont icon-fenxiang1"></span>-->
+<!--                        <p>分享</p>-->
+<!--                    </a>-->
+<!--                </li>-->
             </ul>
         </div>
         <div class="btn_fu">
@@ -347,6 +347,11 @@
                     var swiperImg = data.data.building_img;
                     var modelImg = data.data.floor_img;
                     var all = data.data.data;
+                    for(var key in all){ //处理后台返回的null
+                        if(all[key]==null){
+                            all[key]=''
+                        }
+                    }
                     var str1 = '';//轮播图
                     for (var i = 0; i < swiperImg.length; i++) {
                         str1 += `
@@ -359,14 +364,16 @@
                     //详情数据
                     var str2 = '';//标签
                     var tag = all.building_type_name.split(',');
-                    for (var j = 0; j < tag.length; j++) {
-                        str2 += ` <p>${tag[j]}</p>`;
+                    if(tag.length!==1){
+                        for (var j = 0; j < tag.length; j++) {
+                            str2 += ` <p>${tag[j]}</p>`;
+                        }
+                        $('.label_left').html(str2);
                     }
-                    $('.label_left').html(str2);
                     $('.building_name').text(all.building_name);//楼盘名称
-                    $('.label_right>p').text('开盘时间 :' + all.opening_time);//开盘时间
+                    $('.label_right>p').text('开盘时间 :' + all.opening_time.split(' ')[0]);//开盘时间
                     $('.headlines_route>p').text('经济示范区 ,' + all.building_selling_points);//经济示范区
-                    $('.headlines_price>p:nth-child(1)').text('均价 :' + all.bottom_price);//均价
+                    $('.headlines_price>p:nth-child(1)').text('均价 :' + all.bottom_price+'万');//均价
                     $('.headlines_price>p:nth-child(2)').text('佣金 :' + all.commission_begin + '-' + all.commission_end + '万');//佣金
                     $('.branddesc').text(all.project_rules);//项目规则
                     (function ($) {
@@ -425,8 +432,8 @@
                                     <p>共1张</p>
                                 </div>
                                 <div class="texts">
-                                      <p>${modelImg[k].house_type_name}</p>
-                                      <p>${modelImg[k].house_type_describe}</p>
+                                      <p>${modelImg[k].house_type_name===null?'':modelImg[k].house_type_name}</p>
+                                      <p>${modelImg[k].house_type_describe===null?'':modelImg[k].house_type_describe}</p>
                                 </div>
                             </div>
                         `

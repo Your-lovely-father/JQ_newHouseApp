@@ -333,7 +333,7 @@
     font-weight: bold;
 }
 .client_each>a>p:nth-child(2){
-    font-size: .3rem;
+    font-size: .35rem;
 }
 .client_each_box_tile{
     width: 100%;

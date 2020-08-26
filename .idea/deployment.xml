@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="xiaoleng">
+  <component name="PublishConfigData" serverName="my">
     <serverData>
-      <paths name="xiaoleng">
+      <paths name="my">
         <serverdata>
           <mappings>
-            <mapping deploy="http://192.168.1.112:8089/JQ_newHouseApp/login.html" local="$PROJECT_DIR$/.." web="" />
-            <mapping local="" />
+            <mapping deploy="" local="$PROJECT_DIR$/.." web="/" />
           </mappings>
         </serverdata>
       </paths>
