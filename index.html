@@ -10,10 +10,22 @@
     <link rel="stylesheet" href="static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="static/css/index.css">
     <link rel="stylesheet" href="static/css/common/footer.css">
+    <link rel="stylesheet" href="static/css/common/logoding.css">
     <script type="text/javascript" src="static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="home">
     <!--  搜索区域   -->
     <div class="search_box">
@@ -32,7 +44,7 @@
     <div class="recommend">
         <ul>
             <li>
-                <a href="">
+                <a href="view/followUp/followUp.html">
                     <div class="icon-back">
                         <p class="oen identical">
                             <span class="iconfont icon-kehugenjin"></span>
@@ -42,7 +54,7 @@
                 </a>
             </li>
             <li>
-                <a href="">
+                <a href="view/fond/fond.html">
                     <div class="icon-back">
                         <p class="tow identical">
                             <span class="iconfont icon-loupanshuju"></span>
@@ -79,35 +91,35 @@
             <p></p>
             <p>推荐楼盘</p>
         </div>
-            <div class="tower_content">
-                <a href="view/details/details.html">
-                    <div class="tower_left">
-                        <img src="static/img/bulid.jpg" alt="">
-                        <p>热销</p>
+        <div class="tower_content">
+            <a href="view/details/details.html">
+                <div class="tower_left">
+                    <img src="static/img/bulid.jpg" alt="">
+                    <p>热销</p>
+                </div>
+                <div class="tower_right">
+                    <div class="right_title">柏林时代●二期</div>
+                    <div class="right_m">
+                        <p>85-150 m<sup>2</sup></p>
+                        <p></p>
+                        <p>2-4室</p>
                     </div>
-                    <div class="tower_right">
-                        <div class="right_title">柏林时代●二期</div>
-                        <div class="right_m">
-                            <p>85-150 m<sup>2</sup></p>
-                            <p></p>
-                            <p>2-4室</p>
-                        </div>
-                        <div class="right_area">
-                            <p>合肥</p>
-                            <p>二居</p>
-                            <p>大三居</p>
-                        </div>
-                        <div class="right_price">
-                            <p>70万<span>起</span></p>
-                            <p>待定</p>
-                        </div>
-                        <div class="right_servant">
-                            <p>佣</p>
-                            <p>35万</p>
-                        </div>
+                    <div class="right_area">
+                        <p>合肥</p>
+                        <p>二居</p>
+                        <p>大三居</p>
                     </div>
-                </a>
-            </div>
+                    <div class="right_price">
+                        <p>70万<span>起</span></p>
+                        <p>待定</p>
+                    </div>
+                    <div class="right_servant">
+                        <p>佣</p>
+                        <p>35万</p>
+                    </div>
+                </div>
+            </a>
+        </div>
         <div class="tower_content">
             <a href="view/details/details.html">
                 <div class="tower_left">
@@ -184,6 +196,12 @@
                 </a>
             </li>
             <li>
+                <a href="spread.html">
+                    <span class="iconfont icon-rementuijian"></span>
+                    <p>推荐</p>
+                </a>
+            </li>
+            <li>
                 <a href="customer.html">
                     <span class="iconfont icon-kehu"></span>
                     <p>客户</p>
@@ -199,5 +217,15 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    //调取动画
+    logoding();
+    function logoding() {
+        $('.logoding').show();
+        setTimeout(function () {
+            $('.logoding').hide();
+        }, 3000)
+    }
+</script>
 </html>
 

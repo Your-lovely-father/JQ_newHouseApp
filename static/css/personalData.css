@@ -9,7 +9,6 @@
 }
 .head_portrait_box{
     width:100%;
-    text-align: center;
     padding-top: .6rem;
 }
 .image>img{
@@ -28,17 +27,18 @@
     margin: 0 auto;
 }
 label{
+    width: 2rem;
     position: relative;
     display: block;
-    margin-top: 0.2rem;
+    margin: 0 auto;
 }
 #fileinp{
     position: absolute;
     left: 0;
-    top: 7px;
+    top: 20px;
     opacity: 0;
     width: 2rem;
-    height: .7rem
+    height: .7rem;
 }
 #btn{
     width: 2rem;
@@ -63,7 +63,7 @@ label{
     border-radius: .2rem;
     background: #fff;
     box-shadow:0 0  3px 1px #eee;
-    margin-top: -1.5rem;
+    margin-top: -1rem;
 }
 .label_content{
     width: 100%;
@@ -84,7 +84,7 @@ label{
 }
 .upd_password{
     width: 100%;
-    margin-top: 2rem;
+    margin-top: 1.5rem;
 }
 .border{
     border-bottom:none;

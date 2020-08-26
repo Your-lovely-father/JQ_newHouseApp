@@ -1,0 +1,309 @@
+.spread{
+    width: 100%;
+    padding: .4rem;
+    box-sizing: border-box;
+}
+.active span{
+    color: #f58611 !important;
+}
+.active p{
+    color: #f58611 !important;
+}
+.basic_information{
+    width: 100%;
+    box-shadow: 0 0 3px 1px #eee;
+    padding: .4rem;
+    box-sizing: border-box;
+    border-radius: .2rem;
+}
+.basic_title{
+    width: 100%;
+    font-size: .4rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: .2rem;
+    font-weight: bold;
+    color: #333;
+}
+.basic_content{
+    width: 100%;
+}
+.basic_content>ul>li{
+    display: flex;
+    font-size: .35rem;
+}
+.basic_content>ul>li>span{
+    display: block;
+    padding-right: .3rem;
+    color: #c72a23;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    font-weight: bold;
+}
+.basic_content>ul>li>input{
+    display: block;
+    border-bottom: 1px solid #eee;
+    width: 100%;
+    height: 1.3rem;
+    line-height:1.3rem;
+}
+.customer_demand{
+    width: 100%;
+    box-shadow: 0 0 3px 1px #eee;
+    padding: .4rem;
+    box-sizing: border-box;
+    border-radius: .2rem;
+    margin-top: .5rem;
+}
+.customer_title{
+    width: 100%;
+    font-size: .4rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: .2rem;
+    font-weight: bold;
+    color: #333;
+}
+.customer_content{
+    width: 100%;
+}
+.customer_content>ul>li{
+    display: flex;
+    justify-content: space-between;
+    font-size: .4rem;
+}
+.customer_left{
+    display: flex;
+    height: 1.3rem;
+    line-height: 1.3rem;
+}
+.customer_left>span{
+    display: block;
+    font-weight: bold;
+    color: #c72a23;
+    padding-right: .3rem;
+}
+.customer_left>p{
+    color: #404040;
+    font-weight: bold;
+    border-bottom: 1px solid #eee;
+    width: 2rem;
+}
+.customer_right{
+    width: 6.5rem;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: flex-end;
+    }
+.customer_right>p{
+    width: 100%;
+    color: #666;
+    font-size: .35rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: right;
+}
+.customer_right>span{
+    display: block;
+
+}
+.remarks{
+    width: 100%;
+    box-shadow: 0 0 3px 1px #eee;
+    padding: 0 .4rem;
+    box-sizing: border-box;
+    border-radius: .2rem;
+    font-size: .4rem;
+    margin-top: .5rem;
+    display: flex;
+}
+.remarks>span{
+    display: block;
+    height: 1.3rem;
+    line-height: 1.3rem;
+    font-weight: bold;
+    color: #c72a23;
+    padding-right: .3rem;
+}
+.remarks>input{
+    width: 100%;
+    display: block;
+    height: 1.3rem;
+    line-height: 1.3rem;
+}
+.recommend_btn{
+    width: 100%;
+    margin-top: .5rem;
+}
+.recommend_btn>button{
+    width: 100%;
+    border-radius: .2rem;
+    height: 1.1rem;
+    text-align: center;
+    background-image: linear-gradient(#e95b29,#cd2f23);
+    color: #fff;
+    font-size: .45rem;
+}
+/*
+  意向面积弹框样式
+*/
+.prompt_alert{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    background:rgba(0,0,0,0.5);
+    display: none;
+}
+.alert_box{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 400;
+    transform: translate(-50%,-50%);
+    background: white;
+    width: 8rem;
+    border-radius: 0.2rem;
+}
+.alert_herder{
+    width: 100%;
+    padding: .4rem .4rem .2rem .4rem;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-size: .4rem;
+}
+.alert_herder>p{
+    font-weight: bold;
+}
+.alert_herder>p:nth-child(3){
+    color: red;
+}
+.alert_content{
+    width: 100%;
+    padding: 0 .4rem .4rem .4rem;
+    display: flex;
+    flex-flow: wrap;
+    box-sizing: border-box;
+}
+.alert_content>p{
+    padding: 0 .1rem  .1rem .1rem;
+    border-radius: .2rem;
+    font-size: .2rem;
+    margin-top: .2rem;
+    margin-right: .2rem;
+    border: 1px solid #f5c3c6;
+    color: #f5c3c6;
+}
+.active1{
+    background: #f5c3c6;
+    color: red !important;
+}
+.alert_footer{
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    border-top:1px solid #eee ;
+    display: flex;
+    font-size: .4rem;
+}
+.alert_footer>button{
+    width: 50%;
+    height: 1rem;
+    line-height: 1rem;
+    background: #fff;
+    text-align: center;
+}
+.alert_footer>button:nth-child(1){
+    border-right:1px solid #eee ;
+    border-bottom-left-radius: .2rem;
+    color: #c7262a;
+}
+.alert_footer>button:nth-child(2){
+    border-bottom-right-radius: .2rem;
+    color: red;
+}
+/*
+  购房需求弹框样式
+*/
+.purchas_alert{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 300;
+    background:rgba(0,0,0,0.5);
+    display: none;
+}
+.purchas_box{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 400;
+    transform: translate(-50%,-50%);
+    background: white;
+    width: 8rem;
+    border-radius: 0.2rem;
+}
+.purchas_herder{
+    width: 100%;
+    padding: .4rem .4rem .2rem .4rem;
+    display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+    font-size: .4rem;
+}
+.purchas_herder>p{
+    font-weight: bold;
+}
+.purchas_herder>p:nth-child(3){
+    color: red;
+}
+.purchas_content{
+    width: 100%;
+    padding: 0 .4rem .4rem .4rem;
+    display: flex;
+    flex-flow: wrap;
+    box-sizing: border-box;
+}
+.purchas_content>p{
+    padding: .05rem .4rem;
+    border-radius: .2rem;
+    font-size: .2rem;
+    margin-top: .2rem;
+    margin-right: .2rem;
+    border: 1px solid #f5c3c6;
+    color: #f5c3c6;
+}
+.active2{
+    background: #f5c3c6;
+    color: red !important;
+}
+.purchas_footer{
+    width: 100%;
+    height: 1rem;
+    line-height: 1rem;
+    border-top:1px solid #eee ;
+    display: flex;
+    font-size: .4rem;
+}
+.purchas_footer>button{
+    width: 50%;
+    height: 1rem;
+    line-height: 1rem;
+    background: #fff;
+    text-align: center;
+}
+.purchas_footer>button:nth-child(1){
+    border-right:1px solid #eee ;
+    border-bottom-left-radius: .2rem;
+    color: #c7262a;
+}
+.purchas_footer>button:nth-child(2){
+    border-bottom-right-radius: .2rem;
+    color: red;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <title>添加跟进</title>
+    <script  src="../../../../static/css/libs/jedate/jedate.js"></script>
+    <link rel="stylesheet" href="../../../../static/css/libs/font/iconfont.css">
+    <link rel="stylesheet" href="../../../../static/css/layouts/layouts.css"/>
+    <link rel="stylesheet" href="../../../../static/css/common/footer.css"/>
+    <link rel="stylesheet" href="../../../../static/css/addLook.css"/>
+    <script type="text/javascript" src="../../../../static/js/plugins/jquery.min.js"></script>
+    <script type="text/javascript" src="../../../../static/js/plugins/rem.js"></script>
+</head>
+<body>
+    <div class="addLook">
+        <!--  头部   -->
+        <div class="head_nav">
+            <ul>
+                <li>
+                    <a href="javascript:history.go(-1)">
+                        <span class="iconfont icon-zuojiantou"></span>
+                    </a>
+                </li>
+                <li>添加跟进</li>
+                <li>
+                    <a href="#" class="confirm">
+                        确认
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!--   表单区域     -->
+        <div class="form_box">
+            <div class="form_dateTime">
+                <p>时间:</p>
+                <input type="text" class="form-control input-medium" placeholder="请选择日期时间" name="" id="dateTime" />
+            </div>
+            <div class="record">
+                <p>跟进记录</p>
+                <div class="textarea_box">
+                     <textarea placeholder="请输入跟进记录"></textarea>
+                </div>
+            </div>
+        </div>
+        <!--  提示框区域   -->
+        <div class="prompt_box">
+            <p></p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    jeDate({
+        dateCell: "#dateTime",
+        //format: "YYYY-MM-DD ", //控制是否显示小时
+        format: "YYYY-MM-DD hh:mm:ss", //控制是否显示小时
+        isTime: true
+    });
+    //时间选择
+    var mydateInput = document.getElementById("dateTime");
+    var date = new Date();
+    var dateString = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + "  " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    mydateInput.value = dateString;
+    function promptBox(val){
+        $('.prompt_box').show();
+        $('.prompt_box>p').html(val);
+        setTimeout(function () {
+            $('.prompt_box').hide();
+        },1000);
+    }
+    $(function () {
+        $('.confirm').click(function () {
+            var dateTime=$('#dateTime').val().trim();
+            var textarea=$('.textarea_box>textarea').val().trim();
+            if(dateTime==''){
+                promptBox('请选择时间');
+                return false;
+            }
+            if(textarea==''){
+                promptBox('请填写带看记录');
+                return false;
+            }
+            window.location.href='../follow.html';
+            return false;
+        })
+    })
+</script>
+
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="format-detection" content="telephone=no, email=no"/>
+    <title>推荐</title>
+    <script src="static/css/libs/jedate/jedate.js"></script>
+    <link rel="stylesheet" href="static/css/layouts/layouts.css"/>
+    <link rel="stylesheet" href="static/css/libs/font/iconfont.css">
+    <link rel="stylesheet" href="static/css/common/footer.css">
+    <link rel="stylesheet" href="static/css/spread.css">
+    <script type="text/javascript" src="static/js/plugins/jquery.min.js"></script>
+    <script type="text/javascript" src="static/js/plugins/rem.js"></script>
+</head>
+<body>
+<div class="spread">
+    <div class="spread_box">
+        <div class="basic_information">
+            <div class="basic_title">
+                <p>基本信息</p>
+            </div>
+            <div class="basic_content">
+                <ul>
+                    <li>
+                        <span class="iconfont icon-ren"></span>
+                        <input type="text" placeholder="请输入客户姓名" class="user">
+                    </li>
+                    <li>
+                        <span class="iconfont icon-shouji"></span>
+                        <input type="text" placeholder="请输入客户手机号" class="phone">
+                    </li>
+                    <li>
+                        <span class="iconfont icon-shijian"></span>
+                        <input type="text" class="form-control input-medium" placeholder="请选择日期时间" name=""
+                               id="dateTime"/>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="customer_demand">
+            <div class="customer_title">
+                <p>客户需求</p>
+            </div>
+            <div class="customer_content">
+                <ul>
+                    <li>
+                        <div class="customer_left">
+                            <span class="iconfont icon-ziyuan"></span>
+                            <p>意向楼盘</p>
+                        </div>
+                        <a href="view/like/like.html" class="customer_right">
+                            <p class="like">请选择意向楼盘</p>
+                            <span class="iconfont icon-iconfonti"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <div class="customer_left">
+                            <span class="iconfont icon-fangzi"></span>
+                            <p>意向面积</p>
+                        </div>
+                        <div class="customer_right _rice">
+                            <p class="rice">请选择意向面积</p>
+                            <span class="iconfont icon-iconfonti"></span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="customer_left">
+                            <span class="iconfont icon-tubiao_xuqiu"></span>
+                            <p>购房需求</p>
+                        </div>
+                        <div class="customer_right _demand">
+                            <p class="demand">请选择购房需求</p>
+                            <span class="iconfont icon-iconfonti"></span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="remarks">
+            <span class="iconfont icon-beizhu"></span>
+            <input type="text" placeholder="请输入备注信息..." class="remarks_int">
+        </div>
+        <div class="recommend_btn">
+            <button>推&nbsp; &nbsp;荐</button>
+        </div>
+    </div>
+    <!-- 意向面积弹框   -->
+    <div class="prompt_alert">
+        <div class="alert_box">
+            <div class="alert_herder">
+                <p></p>
+                <p>意向面积</p>
+                <p>X</p>
+            </div>
+            <div class="alert_content">
+                <p>120-180m <sup>2</sup></p>
+                <p>120-181m <sup>2</sup></p>
+                <p>120-182m <sup>2</sup></p>
+                <p>120-183m <sup>2</sup></p>
+                <p>120-184m <sup>2</sup></p>
+            </div>
+            <div class="alert_footer">
+                <button>取消</button>
+                <button>选好了</button>
+            </div>
+        </div>
+    </div>
+    <!--  购房需求弹窗  -->
+    <div class="purchas_alert">
+        <div class="purchas_box">
+            <div class="purchas_herder">
+                <p></p>
+                <p>购房需求</p>
+                <p>X</p>
+            </div>
+            <div class="purchas_content">
+                <p>刚需</p>
+                <p>婚房</p>
+                <p>教育</p>
+                <p>投资</p>
+                <p>改善</p>
+                <p>其他</p>
+            </div>
+            <div class="purchas_footer">
+                <button>取消</button>
+                <button>选好了</button>
+            </div>
+        </div>
+    </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
+    </div>
+    <!--  底部  -->
+    <div class="footer">
+        <ul>
+            <li>
+                <a href="index.html">
+                    <span class="iconfont icon-icon_huabanfuben"></span>
+                    <p>首页</p>
+                </a>
+            </li>
+            <li>
+                <a href="building.html">
+                    <span class="iconfont icon-ziyuan"></span>
+                    <p>楼盘</p>
+                </a>
+            </li>
+            <li class="active">
+                <a href="spread.html">
+                    <span class="iconfont icon-rementuijian"></span>
+                    <p>推荐</p>
+                </a>
+            </li>
+            <li>
+                <a href="customer.html">
+                    <span class="iconfont icon-kehu"></span>
+                    <p>客户</p>
+                </a>
+            </li>
+            <li>
+                <a href="my.html">
+                    <span class="iconfont icon-wode"></span>
+                    <p>我的</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    jeDate({
+        dateCell: "#dateTime",
+        //format: "YYYY-MM-DD ", //控制是否显示小时
+        format: "YYYY-MM-DD hh:mm:ss", //控制是否显示小时
+        isTime: true
+    });
+    //时间选择
+    var mydateInput = document.getElementById("dateTime");
+    var date = new Date();
+    var dateString = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + "  " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+    mydateInput.value = dateString;
+
+    $(function () {
+        function promptBox(val) {
+            $('.prompt_box').show();
+            $('.prompt_box>p').html(val);
+            setTimeout(function () {
+                $('.prompt_box').hide();
+            }, 1000);
+        }
+
+        //推荐
+        $('.recommend_btn>button').click(function () {
+            var user = $('.user').val().trim();
+            var phone = $('.phone').val().trim();
+            var dateTime = $('#dateTime').val().trim();
+            var like = $('.like').text();
+            var rice = $('.rice').text();
+            var demand = $('.demand').text();
+            var remarks_int = $('.remarks_int').val().trim();
+            if (!(/^[\u4e00-\u9fa5]+$/.test(user))) {
+                promptBox('请输入客户姓名-只能为中文汉子');
+                return false;
+            }
+            if (!(/^1[3456789]\d{9}$/.test(phone))) {
+                promptBox('手机号码有误');
+                return false;
+            }
+            if (!dateTime) {
+                promptBox('请选择时间');
+                return false;
+            }
+            if (like=='请选择意向楼盘') {
+                promptBox('请选择意向楼盘');
+                return false;
+            }
+            if (rice=='请选择意向面积') {
+                promptBox('请选择意向面积');
+                return false;
+            }
+            if (demand=='请选择购房需求') {
+                promptBox('请选择购房需求');
+                return false;
+            }
+            if (!remarks_int) {
+                promptBox('请输入备注信息');
+                return false;
+            }
+            promptBox('推荐成功');
+        });
+        //意向面积操作
+        function shutDown() {
+            $('.prompt_alert').hide();
+        }
+        $('._rice').click(function () {
+            $('.prompt_alert').show();
+        });
+        //关闭X
+        $('.alert_herder>p:nth-child(3)').click(function () {
+            shutDown()
+        });
+        //取消
+        $('.alert_footer>button:nth-child(1)').click(function () {
+            shutDown();
+        });
+        //确认
+        $('.alert_footer>button:nth-child(2)').click(function () {
+            shutDown();
+        });
+        var metreArr=[];
+        $(".alert_content p").click(function() {
+            $(this).toggleClass("active1");
+            var flag=$(this).hasClass('active1');
+            if(flag){
+                metreArr.push($(this).html()) ;
+            }else {
+                metreArr.splice($(this).html(),1);
+            }
+        });
+        //选好了
+        $(".alert_footer>button:nth-child(2)").click(function () {
+            if(metreArr.length>0){
+                $('.rice').html(metreArr.join(','))
+            }else {
+                $('.rice').text('请选择意向面积')
+            }
+        });
+        //购房需求操作
+        function purchasDown() {
+            $('.purchas_alert').hide();
+        }
+        $('._demand').click(function () {
+            $('.purchas_alert').show();
+        });
+        //关闭X
+        $('.purchas_herder>p:nth-child(3)').click(function () {
+            purchasDown()
+        });
+        //取消
+        $('.purchas_footer>button:nth-child(1)').click(function () {
+            purchasDown();
+        });
+        //确认
+        $('.purchas_footer>button:nth-child(2)').click(function () {
+            purchasDown();
+        });
+        var purchasArr=[];
+        $(".purchas_content p").click(function() {
+            $(this).toggleClass("active2");
+            var flag=$(this).hasClass('active2');
+            if(flag){
+                purchasArr.push($(this).html()) ;
+            }else {
+                purchasArr.splice($(this).html(),1);
+            }
+        });
+        //选好了
+        $(".purchas_footer>button:nth-child(2)").click(function () {
+            if(purchasArr.length>0){
+                $('.demand').html(purchasArr.join(','))
+            }else {
+                $('.demand').text('请选择购房需求')
+            }
+        })
+
+    })
+</script>
+</html>

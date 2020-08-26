@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../../static/css/libs/font/iconfont.css">
+    <link rel="stylesheet" href="../../static/css/layouts/layouts.css"/>
+    <link rel="stylesheet" href="../../static/css/common/footer.css"/>
+    <title>百度地图</title>
+    <script src="http://api.map.baidu.com/api?v=2.0&ak=9tf4cqm4KsAZiGI708OS58f4bMuMfLLm" type="text/javascript"></script>
+    <script  type="text/javascript" src="../../static/js/plugins/jquery.min.js"></script>
+    <script  type="text/javascript" src="../../static/js/plugins/rem.js"></script>
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<!--  头部   -->
+<div class="head_nav">
+    <ul>
+        <li>
+            <a href="javascript:history.go(-1)">
+                <span class="iconfont icon-zuojiantou"></span>
+            </a>
+        </li>
+        <li>百度地图</li>
+        <li></li>
+    </ul>
+</div>
+<div  id="map"></div>
+</body>
+<script type="text/javascript">
+    var map=new BMap.Map('map');
+    var point = new BMap.Point(116.404,39.915);
+    map.centerAndZoom(point,20);
+    var local =new BMap.LocalSearch(map,{
+        renderOptions:{
+            map:map
+        }
+    });
+    local.search("沈阳奉天银座");
+
+</script>
+</html>

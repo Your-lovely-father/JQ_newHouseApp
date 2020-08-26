@@ -1,0 +1,133 @@
+.housing{
+    width: 100%;
+    margin-top: 1.22rem;
+}
+/*
+    搜索样式
+*/
+.search_area{
+    width: 100%;
+    padding: .4rem;
+    box-sizing: border-box;
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+.search_area_left{
+    width: 85%;
+    background: #eee;
+    border-radius: 5rem;
+    height: .9rem;
+    display: flex;
+}
+.search_area_left>span{
+    color: #ccc;
+    margin-left: .3rem;
+    display: block;
+    height: .9rem;
+    line-height: 1rem;
+}
+.search_area_left>input{
+    display: block;
+    margin-left: .3rem;
+    width: 85%;
+}
+.search_area_right{
+    margin-left: .3rem;
+    margin-top: -.05rem;
+}
+.search_area_right>button{
+    background: #fff;
+    height: .9rem;
+    width: 1rem;
+}
+/*
+    列表样式
+*/
+.tabList{
+    width: 100%;
+}
+.tabList_box{
+    width: 100%;
+    border-bottom: 1px solid #eee;
+}
+.tabList_content{
+    width: 100%;
+    padding: .2rem .4rem;
+    box-sizing: border-box;
+}
+.tabList_top{
+    display: flex;
+    justify-content: space-between;
+    font-size: .4rem;
+}
+.tabList_top>p:nth-child(2){
+    color: red;
+}
+.tabList_bottom{
+    display: flex;
+    justify-content: space-between;
+    font-size: .3rem;
+    color: #ccc;
+    margin-top: .2rem;
+}
+/*
+    提示框样式
+*/
+.promptBack{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 400;
+    display: none;
+}
+.promptContent{
+    position: fixed;
+    z-index: 500;
+    background: #fff;
+    border-radius: .3rem;
+    width: 7rem;
+    height: 3.3rem;
+    margin:auto;
+    left:0;
+    right:0;
+    top:0;
+    bottom:0;
+ }
+.prompt_top{
+    width: 100%;
+    text-align: center;
+    padding: .4rem 0;
+}
+.prompt_top>p:nth-child(1){
+    font-size: .45rem;
+    font-weight: bold;
+}
+.prompt_top>p:nth-child(2){
+    font-size: .35rem;
+    margin-top: .2rem;
+}
+.prompt_bottom{
+    width: 100%;
+    border-top: 1px solid #eee;
+}
+.prompt_bottom{
+    width: 100%;
+    display: flex;
+}
+.prompt_bottom>p>a{
+    display: block;
+    color: #c72a23;
+}
+.prompt_bottom>p{
+    font-size: .4rem;
+    width: 50%;
+    text-align: center;
+    padding: .3rem 0;
+    color: #c72a23;
+}
+.prompt_bottom>p:nth-child(1){
+    border-right: 1px solid #eee;
+}

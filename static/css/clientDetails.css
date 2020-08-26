@@ -1,0 +1,99 @@
+.clientDetails {
+    width: 100%;
+}
+
+.clientDetails_box {
+    width: 100%;
+    margin-top: 1.22rem;
+}
+
+.information {
+    padding-left: .4rem;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.name {
+    width: 100%;
+}
+
+.name > p {
+    padding: .4rem 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+}
+.name > p > span {
+    display: block;
+    font-size: .45rem;
+}
+
+.same_kind {
+    color: #ccc;
+    width: 1.8rem;
+}
+
+.with {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: .4rem;
+    box-sizing: border-box;
+    background: #eeeeee;
+}
+
+.with > p {
+    font-size: .45rem;
+}
+
+.with > p:nth-child(1) {
+    color: #666;
+}
+
+.with > p:nth-child(2) > a {
+    font-size: .35rem;
+    background: #fff;
+    color: red;
+    border: 1px solid red;
+    border-radius: .1rem;
+    padding: .1rem .2rem;
+}
+
+.follow {
+    padding-left: .4rem;
+    box-sizing: border-box;
+    background: #fff;
+}
+
+.follow_box {
+    width: 100%;
+    display: flex;
+    padding: .4rem 0;
+    border-bottom: 1px solid #eee;
+    font-size: .4rem;
+}
+.follow_box_left{
+    width: 50%;
+}
+.follow_box_right{
+    width: 50%;
+}
+.same_type{
+    color: #ccc;
+}
+.follow_btn{
+    width: 100%;
+    padding: .4rem;
+    box-sizing: border-box;
+    background: #fff;
+}
+.follow_btn>a{
+    display: block;
+}
+.follow_btn>a>ul{
+    display: flex;
+    justify-content: space-between;
+    font-size: .4rem;
+}
+.follow_btn>a>ul>li:nth-child(2)>span{
+    font-size: .6rem;
+}

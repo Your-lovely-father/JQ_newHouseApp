@@ -1,0 +1,70 @@
+.like{
+    width: 100%;
+    margin-top: 1.22rem;
+}
+.like_add{
+    width: 100%;
+    padding: 0 .4rem;
+    box-sizing: border-box;
+}
+.like_add>p{
+    font-size: .45rem;
+    padding-bottom: .2rem;
+}
+.like_add_content{
+    width: 100%;
+    display: flex;
+    flex-flow: wrap;
+    padding-bottom: .3rem;
+    border-bottom: 1px solid #eee;
+}
+.like_add_content>p{
+    background: #eee;
+    color: #333;
+    padding: .15rem .25rem;
+    border-radius: .15rem;
+    margin-right: .2rem;
+    margin-top: .2rem;
+    font-size: .35rem;
+}
+.like_tab{
+    width: 100%;
+    padding: .2rem .4rem;
+    box-sizing: border-box;
+}
+.like_tab_box{
+    width: 100%;
+    padding: .3rem 0;
+    border-bottom: 1px #eee solid;
+    display: flex;
+    justify-content: space-between;
+}
+.like_tab_box>p{
+    font-size: .4rem;
+    font-weight: bold;
+}
+.like_tab_box>input{
+    display: block;
+    border-radius: .1rem;
+    border: 1px solid #eeee;
+    width: .5rem;
+    height: .5rem;
+    text-align: center;
+}
+.like_tab_box>input[type="checkbox"]:checked::before{
+    content: "\2713";color:#e50232;
+    font-weight: bold;
+}
+.like_confirm{
+    width: 100%;
+    margin-top: 1rem;
+}
+.like_confirm>button{
+    width: 100%;
+    border-radius: .2rem;
+    height: 1.1rem;
+    text-align: center;
+    background-image: linear-gradient(#e95b29,#cd2f23);
+    color: #fff;
+    font-size: .45rem;
+}

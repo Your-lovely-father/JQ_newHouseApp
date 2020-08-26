@@ -57,13 +57,15 @@
     width: 30%;
     height: 1.5rem;
     line-height: 1.5rem;
-    color: #fff;
+
     border-top: 1px solid #c72a23;
     background: #c72a23;
-    font-size: .5rem;
+    font-size: .45rem;
     text-align: center;
 }
-
+.btn_fu>a{
+    color: #fff;
+}
 .details_content {
     width: 100%;
     padding: .3rem .4rem;
@@ -154,21 +156,25 @@
 
 .location {
     width: 100%;
+}
+.location>a{
+    display: block;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid #eee;
     padding: .2rem 0;
 }
 
-.location > span {
+.location >a> span {
     display: block;
 }
 
-.location > span:nth-child(1) {
+.location > a > span:nth-child(1) {
     color: #be2e13;
 }
 
-.location > span:nth-child(2) {
+.location > a > span:nth-child(2) {
     font-size: .6rem;
 }
 

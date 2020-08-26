@@ -1,0 +1,58 @@
+.head_nav>ul>li>a{
+    color: #fff;
+}
+.addLook{
+    margin-top: 1.5rem;
+}
+.form_box{
+    width: 100%;
+    padding-left: .4rem;
+    box-sizing: border-box;
+}
+.form_dateTime{
+    width: 100%;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    padding: .4rem 0;
+}
+.form_dateTime>input{
+    display: block;
+    font-size: .4rem;
+}
+.form_dateTime>p{
+    margin-right: .4rem;
+    font-size: .4rem;
+}
+.housing{
+    width: 100%;
+}
+.housing>a{
+    display: block;
+    font-size: .4rem;
+    display: flex;
+    justify-content: space-between;
+    padding: .4rem 0;
+    border-bottom: 1px solid #eee;
+}
+.housing>a>p:nth-child(2){
+    color: #ccc;
+    font-size: .43rem;
+}
+.record{
+    width: 100%;
+}
+.record>p{
+    font-size: .4rem;
+    padding: .4rem 0;
+}
+.textarea_box{
+    width: 100%;
+}
+.textarea_box>textarea{
+    width: 100%;
+    resize: none;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    height: 2rem;
+    font-size: .4rem;
+}

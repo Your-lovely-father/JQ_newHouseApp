@@ -294,3 +294,54 @@
 .on{
     display: block;
 }
+/*
+ 列表样式
+*/
+.tab{
+    width: 100%;
+    padding: .4rem;
+    box-sizing: border-box;
+}
+.client_each_box{
+    width: 100%;
+    border-radius: .2rem;
+    background: #fff;
+    box-shadow: 0 0 3px  1px #eee;
+    box-sizing: border-box;
+    margin-top: .4rem;
+    margin-bottom: 1.5rem;
+    padding: 0 .4rem;
+}
+.client_each{
+    width: 100%;
+}
+.client_each>a{
+    width: 100%;
+    display: block;
+    display: flex;
+    border-bottom: 1px solid #eee;
+    padding: .4rem 0;
+}
+.client_each>a>p{
+    width: 50%;
+    text-align: center;
+}
+.client_each>a>p:nth-child(1){
+    font-size: .35rem;
+    font-weight: bold;
+}
+.client_each>a>p:nth-child(2){
+    font-size: .3rem;
+}
+.client_each_box_tile{
+    width: 100%;
+    display: flex;
+    font-size: .4rem;
+    padding: .4rem 0;
+    border-bottom: 1px #eee solid;
+    color: #ccc;
+}
+.client_each_box_tile>p{
+    width: 50%;
+    text-align: center;
+}
