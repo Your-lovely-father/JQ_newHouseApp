@@ -18,3 +18,33 @@
     font-size: .4rem;
     font-weight: bold;
 }
+.choose>p>input{
+    display: block;
+    border-radius: .1rem;
+    border: 1px solid #eeee;
+    width: .5rem;
+    height: .5rem;
+    text-align: center;
+}
+.choose>p>input[type="checkbox"]:checked::before{
+    content: "\2713";color:#e50232;
+    font-weight: bold;
+}
+.choose{
+    display: flex;
+}
+.choose>p{
+    display: flex;
+    margin-right: .2rem;
+    font-size: .4rem;
+
+}
+.choose>p>span{
+
+    display: block;
+    margin-right: .2rem;
+}
+.choose>p>input{
+    display: block;
+    margin-top: .05rem;
+}

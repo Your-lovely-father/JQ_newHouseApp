@@ -36,7 +36,8 @@
                 </a>
             </li>
             <li>意向楼盘详情</li>
-            <li>删除</li>
+            <li class="del">删除</li>
+            <li style="display: none" class="upd">修改</li>
         </ul>
     </div>
     <!--   表单区域     -->
@@ -57,6 +58,19 @@
             <p>意向楼盘:</p>
             <input type="text" class="building_name"/>
         </div>
+        <div class="form_box">
+            <p>客户状态:</p>
+            <div class="choose">
+                <p>
+                    <span>已访问</span>
+                    <input type="checkbox" class="access" value="20">
+                </p>
+                <p>
+                    <span>已签约</span>
+                    <input type="checkbox" class="sign" value="30">
+                </p>
+            </div>
+        </div>
     </div>
     <!--  提示框区域   -->
     <div class="prompt_box">
@@ -68,25 +82,37 @@
 <script type="text/javascript" src="../../../static/js/common/api.js"></script>
 <script type="text/javascript" src="../../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
-$(function () {
-    access_token = localStorageGet('access_token');
-    //获取url中的参数
-    function getUrlParam(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-        if (r != null) return decodeURI(r[2]) ;
-        return null; //返回参数值
-    }
-    //接收URL中的参数id
-    var id = getUrlParam('id');
-    area_name = getUrlParam('area_name');
-    client_name = getUrlParam('client_name');
-    user_name = getUrlParam('user_name');
-    data = {
-        id: id
-    };
-     $.ajax({
-            url: api + "/erp/intention_detail",
+    $(function () {
+        access_token = localStorageGet('access_token');
+
+        //获取url中的参数
+        function getUrlParam(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return decodeURI(r[2]);
+            return null; //返回参数值
+        }
+
+        //接收URL中的参数id
+        var id = getUrlParam('id');
+        area_name = getUrlParam('area_name');
+        client_name = getUrlParam('client_name');
+        user_name = getUrlParam('user_name');
+        data = {
+            id: id
+        };
+        updData = {
+            id: id,
+            client_id: '',
+            user_id: '',
+            building_id: '',
+            visit_type: '',
+            province_id: '',
+            city_id: '',
+            area_id: '',
+        };
+        $.ajax({
+            url: api + "/api/intention_detail",
             type: "POST",
             dataType: "json",
             data: data,
@@ -98,12 +124,24 @@ $(function () {
             },
             success: function (data) {
                 if (data.code == 200) {
-                    var all =data.data;
+                    var all = data.data;
+                    updData.client_id = all.client_id;
+                    updData.user_id = all.user_id;
+                    updData.building_id = all.building_id;
+                    updData.province_id = all.province_id;
+                    updData.city_id = all.city_id;
+                    updData.area_id = all.area_id;
                     $('.area_name').val(area_name);
                     $('.client_name').val(client_name);
                     $('.user_name').val(user_name);
                     $('.building_name').val(all.building_name);
                     $('.logoding').hide();
+                    if (all.visit_type == 20) {
+                        $(".access").attr("checked", true)
+                    }
+                    if(all.visit_type == 30){
+                        $(".sign").attr("checked", true)
+                    }
                 } else {
                     $('.logoding').hide();
                 }
@@ -113,34 +151,94 @@ $(function () {
                 $('.logoding').hide();
             },
         });
-    $('.head_nav>ul>li:nth-child(3)').click(function () {
-        $.ajax({
-            url: api + "/erp/intention_del",
-            type: "POST",
-            dataType: "json",
-            data: data,
-            headers: {
-                'access-token': access_token
-            },
-            beforeSend: function () {
-                $('.logoding').show();
-            },
-            success: function (data) {
-                if (data.code == '100006') {
+        $('.del').click(function () { //删除
+            $.ajax({
+                url: api + "/api/intention_del",
+                type: "POST",
+                dataType: "json",
+                data: data,
+                headers: {
+                    'access-token': access_token
+                },
+                beforeSend: function () {
+                    $('.logoding').show();
+                },
+                success: function (data) {
+                    if (data.code == '100006') {
+                        $('.logoding').hide();
+                        promptBox('删除成功');
+                        window.location.href = '../fond.html';
+                    } else {
+                        $('.logoding').hide();
+                        promptBox('删除失败');
+                    }
+                },
+                error: function () {
+                    promptBox("出错啦...");
                     $('.logoding').hide();
-                    promptBox('删除成功');
-                    window.location.href='../fond.html';
-                } else {
-                    $('.logoding').hide();
-                    promptBox('删除失败');
-                }
-            },
-            error: function () {
-                promptBox("出错啦...");
-                $('.logoding').hide();
-            },
+                },
+            });
         });
-    })
-})
+        $('.upd').click(function () { //修改
+            $.ajax({
+                url: api + "/api/intention_edit",
+                type: "POST",
+                dataType: "json",
+                data: updData,
+                headers: {
+                    'access-token': access_token
+                },
+                beforeSend: function () {
+                    $('.logoding').show();
+                },
+                success: function (data) {
+                    if (data.code == '200003') {
+                        $('.logoding').hide();
+                        promptBox('修改成功');
+                        window.location.href = '../fond.html';
+                    } else {
+                        $('.logoding').hide();
+                        promptBox('修改失败');
+                    }
+                },
+                error: function () {
+                    promptBox("出错啦...");
+                    $('.logoding').hide();
+                },
+            });
+        });
+        $(function () { //全选按钮处理
+            $('.access').click(function () {
+                var flag = $(".access").prop("checked");
+                if (flag) {
+                    $('.del').hide();
+                    $('.upd').show();
+                    $(".access").attr("checked", true)
+                } else {
+                    $('.del').show();
+                    $('.upd').hide();
+                    $(".access").attr("checked", false)
+                }
+                $(".sign").prop("checked", false);
+                var access = $(".access").val();
+                updData.visit_type = access
+            });
+            $('.sign').click(function () {
+                var flag = $(".sign").prop("checked");
+                if (flag) {
+                    $('.del').hide();
+                    $('.upd').show();
+                    $(".sign").attr("checked", true)
+                } else {
+                    $('.del').show();
+                    $('.upd').hide();
+                    $(".sign").attr("checked", false)
+                }
+                $(".access").prop("checked", false);
+                var sign = $(".sign").val();
+                updData.visit_type = sign
+            });
+        });
+    });
 </script>
 </html>

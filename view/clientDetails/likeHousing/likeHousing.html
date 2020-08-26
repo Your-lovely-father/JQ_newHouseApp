@@ -93,6 +93,7 @@
 <script type="text/javascript">
     access_token=localStorageGet('access_token');
     personal_data=localStorageGet('personal_data');
+    client_id=localStorageGet('client_id');
     id=''; //楼盘id
     buildName='';//楼盘名称
     buildingList={
@@ -103,50 +104,6 @@
         area_id:personal_data.area_id,
         building_name:''
     };
-    $(function () {
-        $('.promptBack').click(function () {
-            $('.promptBack').hide()
-        });
-        $('.tabList').on('click','.tabList_box',function () {
-            $('.promptBack').show();
-            buildName=$('.tabList_top>p:nth-child(1)',this).text();
-            $('.prompt_top>p:nth-child(2)').text(buildName);
-            building_list(buildName)
-        });
-        $('.prompt_bottom>p>a').click(function () { //查看详情
-            window.location.href='../../details/details.html?id='+id+'&which='+'likeHousing'
-        });
-        $('.search_area_right>button').click(function () { //搜索
-            var building_name=$('.search_int').val();
-            buildingList.building_name=building_name;
-            building_list()
-        });
-        $('.confirm').click(function () { //确认
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            // window.location.href='../../addLook/addLook.html?id=';
-            $('.promptBack').hide()
-        });
-    });
     //获取楼盘
     function building_list(val) {
         $.ajax({
@@ -196,6 +153,62 @@
         });
     }
     building_list();
-
+    $(function () {
+        $('.promptBack').click(function () {
+            $('.promptBack').hide()
+        });
+        $('.tabList').on('click','.tabList_box',function () {
+            $('.promptBack').show();
+            buildName=$('.tabList_top>p:nth-child(1)',this).text();
+            $('.prompt_top>p:nth-child(2)').text(buildName);
+            building_list(buildName)
+        });
+        $('.prompt_bottom>p>a').click(function () { //查看详情
+            window.location.href='../../details/details.html?id='+id+'&which='+'likeHousing'
+        });
+        $('.search_area_right>button').click(function () { //搜索
+            var building_name=$('.search_int').val();
+            buildingList.building_name=building_name;
+            building_list()
+        });
+        $('.confirm').click(function () { //确认
+            var fondData={
+                client_id:client_id,
+                user_id:personal_data.id,
+                building_id:id,
+                visit_type:10,
+                province_id:personal_data.province_id,
+                city_id:personal_data.city_id,
+                area_id:personal_data.area_id,
+            };
+            $.ajax({
+                url:api+"/api/intention_add" ,
+                type:"POST" ,
+                dataType:"json",
+                data:fondData,
+                headers:{
+                    'access-token':access_token
+                },
+                beforeSend:function(){
+                    $('.logoding').show();
+                },
+                success:function (data) {
+                    if(data.code=="200001"){
+                        promptBox("添加意向楼盘成功");
+                        window.location.href='../../fond/fond.html';
+                        $('.logoding').hide();
+                    }else {
+                        promptBox("添加意向楼盘失败");
+                        $('.logoding').hide();
+                    }
+                },
+                error:function () {
+                    promptBox("出错啦...");
+                    $('.logoding').hide();
+                },
+            });
+            $('.promptBack').hide()
+        });
+    });
 </script>
 </html>
