@@ -215,12 +215,12 @@
 <script type="text/javascript" src="static/js/common/image.js"></script>
 <script type="text/javascript" src="static/js/common/token.js"></script>
 <script type="text/javascript" src="static/js/common/alrte.js"></script>
+<script type="text/javascript" src="static/js/common/api.js"></script>
 <script type="text/javascript" src="static/js/common/localStorage.js"></script>
 <script type="text/javascript">
     var personal_data=localStorageGet('personal_data');
     token('login.html');
     echoImg(".head_portrait_img>img",personal_data.user_image);
-    api="http://192.168.1.105:8080";
     function userName(){
         $('.head_portrait_text>p:nth-child(1)').text(personal_data.user_name);
     }

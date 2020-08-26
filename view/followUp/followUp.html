@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../../static/css/layouts/layouts.css" />
     <link rel="stylesheet" href="../../static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="../../static/css/common/footer.css">
+    <link rel="stylesheet" href="../../static/css/common/logoding.css">
     <link rel="stylesheet" href="../../static/css/customer.css">
     <script type="text/javascript" src="../../static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="../../static/js/plugins/rem.js"></script>
@@ -19,6 +20,17 @@
     </style>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="customer">
     <!--  头部   -->
     <div class="head_nav">
@@ -144,4 +156,45 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="../../static/js/common/image.js"></script>
+<script type="text/javascript" src="../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../static/js/common/localStorage.js"></script>
+<script type="text/javascript">
+    access_token=localStorageGet('access_token');
+    // cacheData=localStorageGet('personal_data');
+    api="http://192.168.1.108:8080";
+    $(function () {
+        var followList={
+            page:1,
+            offset:999,
+            // user_id:cacheData.id,
+        };
+        $.ajax({
+            url:api+"/erp/get_follow_up_list" ,
+            type:"POST" ,
+            dataType:"json",
+            headers: {
+                'access-token':access_token
+            },
+            data:followList,
+            beforeSend:function(){
+                $('.logoding').show();
+            },
+            success:function (data) {
+                console.log(data);
+                console.log(data.code);
+                console.log(data.data.data);
+                if(data.code==200){
+                    $('.logoding').hide();
+                }else {
+                    $('.logoding').hide();
+                }
+            },
+            error:function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
+    })
+</script>
 </html>

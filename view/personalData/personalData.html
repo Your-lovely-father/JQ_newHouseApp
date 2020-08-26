@@ -111,13 +111,13 @@
 <script type="text/javascript" src="../../static/js/common/image.js"></script>
 <script type="text/javascript" src="../../static/js/common/token.js"></script>
 <script type="text/javascript" src="../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../static/js/common/api.js"></script>
 <script type="text/javascript" src="../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
     personal_data = localStorageGet('personal_data');
     token('../../login.html');
     echoImg(".image>img", personal_data.user_image);
     access_token = localStorageGet('access_token');
-    api = "http://192.168.1.105:8080";
     function shutDown() {
         $('.prompt_alert').hide();
     }

@@ -146,7 +146,7 @@
 }
 
 .right_area > p {
-    padding: .1rem .25rem;
+    padding: .05rem .2rem;
     font-size: .3rem;
     margin-right: .2rem;
     border-radius: .1rem;
@@ -170,8 +170,6 @@
 .right_price {
     width: 100%;
     color: #e15f3f;
-    font-size: .4rem;
-    font-weight: bold;
     display: flex;
     margin-top: .1rem;
 }
@@ -182,8 +180,15 @@
 
 .right_price > p:nth-child(1) {
     margin-right: .5rem;
+    font-size: .4rem;
+    font-weight: bold;
 }
-
+.right_price>p:nth-child(2){
+    font-size: .35rem;
+}
+.right_price > p:nth-child(2) > sup {
+    font-size: .1rem;
+}
 .right_servant {
     width: 100%;
     display: flex;

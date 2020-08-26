@@ -91,94 +91,35 @@
             <p></p>
             <p>推荐楼盘</p>
         </div>
-        <div class="tower_content">
-            <a href="view/details/details.html">
-                <div class="tower_left">
-                    <img src="static/img/bulid.jpg" alt="">
-                    <p>热销</p>
-                </div>
-                <div class="tower_right">
-                    <div class="right_title">柏林时代●二期</div>
-                    <div class="right_m">
-                        <p>85-150 m<sup>2</sup></p>
-                        <p></p>
-                        <p>2-4室</p>
-                    </div>
-                    <div class="right_area">
-                        <p>合肥</p>
-                        <p>二居</p>
-                        <p>大三居</p>
-                    </div>
-                    <div class="right_price">
-                        <p>70万<span>起</span></p>
-                        <p>待定</p>
-                    </div>
-                    <div class="right_servant">
-                        <p>佣</p>
-                        <p>35万</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="tower_content">
-            <a href="view/details/details.html">
-                <div class="tower_left">
-                    <img src="static/img/bulid.jpg" alt="">
-                    <p>热销</p>
-                </div>
-                <div class="tower_right">
-                    <div class="right_title">柏林时代●二期</div>
-                    <div class="right_m">
-                        <p>85-150 m<sup>2</sup></p>
-                        <p></p>
-                        <p>2-4室</p>
-                    </div>
-                    <div class="right_area">
-                        <p>合肥</p>
-                        <p>二居</p>
-                        <p>大三居</p>
-                    </div>
-                    <div class="right_price">
-                        <p>70万<span>起</span></p>
-                        <p>待定</p>
-                    </div>
-                    <div class="right_servant">
-                        <p>佣</p>
-                        <p>35万</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        <div class="tower_content">
-            <a href="view/details/details.html">
-                <div class="tower_left">
-                    <img src="static/img/bulid.jpg" alt="">
-                    <p>热销</p>
-                </div>
-                <div class="tower_right">
-                    <div class="right_title">柏林时代●二期</div>
-                    <div class="right_m">
-                        <p>85-150 m<sup>2</sup></p>
-                        <p></p>
-                        <p>2-4室</p>
-                    </div>
-                    <div class="right_area">
-                        <p>合肥</p>
-                        <p>二居</p>
-                        <p>大三居</p>
-                    </div>
-                    <div class="right_price">
-                        <p>70万<span>起</span></p>
-                        <p>待定</p>
-                    </div>
-                    <div class="right_servant">
-                        <p>佣</p>
-                        <p>35万</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        </a>
+<!--        <div class="tower_content">-->
+<!--            <a href="view/details/details.html">-->
+<!--                <div class="tower_left">-->
+<!--                    <img src="static/img/bulid.jpg" alt="">-->
+<!--                    <p>热销</p>-->
+<!--                </div>-->
+<!--                <div class="tower_right">-->
+<!--                    <div class="right_title">柏林时代●二期</div>-->
+<!--                    <div class="right_m">-->
+<!--                        <p>85-150 m<sup>2</sup></p>-->
+<!--                        <p></p>-->
+<!--                        <p>2-4室</p>-->
+<!--                    </div>-->
+<!--                    <div class="right_area">-->
+<!--                        <p>合肥</p>-->
+<!--                        <p>二居</p>-->
+<!--                        <p>大三居</p>-->
+<!--                    </div>-->
+<!--                    <div class="right_price">-->
+<!--                        <p>70万<span>起</span></p>-->
+<!--                        <p>待定</p>-->
+<!--                    </div>-->
+<!--                    <div class="right_servant">-->
+<!--                        <p>佣</p>-->
+<!--                        <p>35万</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--        </div>-->
     </div>
     <!--  底部  -->
     <div class="footer">
@@ -217,7 +158,85 @@
     </div>
 </div>
 </body>
+<script type="text/javascript" src="static/js/common/alrte.js"></script>
+<script type="text/javascript" src="static/js/common/api.js"></script>
+<script type="text/javascript" src="static/js/common/localStorage.js"></script>
 <script type="text/javascript">
+    imgApi='https://erp-report-shenyang.oss-cn-beijing.aliyuncs.com/';
+    access_token=localStorageGet('access_token');
+    $(function () {
+        var screening={
+            page:1,
+            offset:999,
+            is_hot:20,
+        };
+        $.ajax({
+            url:api+"/erp/get_building_list" ,
+            type:"POST" ,
+            dataType:"json",
+            headers: {
+                'access-token':access_token
+            },
+            data:screening,
+            beforeSend:function(){
+                $('.logoding').show();
+            },
+            success:function (data) {
+                if(data.code==200){
+                    //拼接字符串
+                    var str = '';
+                    //对数据做遍历，拼接到页面显示
+                    var all=data.data.data;
+                    for(var i=0;i<all.length;i++){
+                        allTag=all[i].building_type_name.split(',');
+                        str += `
+                           <div class="tower_content">
+                                <a href=${'view/details/details.html?id='+all[i].id}>
+                                    <div class="tower_left">
+                                        <img src=${imgApi+all[i].building_img_url} alt="">
+                                        <p>${all[i].is_hot ==20 ? '推荐': '热销'}</p>
+                                    </div>
+                                    <div class="tower_right">
+                                        <div class="right_title">${all[i].building_name}</div>
+                                        <div class="right_m">
+                                            <p>${all[i].house_floorage_begin}-${all[i].house_floorage_end}m<sup>2</sup></p>
+                                            <p></p>
+                                            <p>${all[i].habitable_begin}-${all[i].habitable_end}室</p>
+                                        </div>
+                                        <div class="right_area">
+
+                                        </div>
+                                        <div class="right_price">
+                                            <p>${all[i].bottom_price}万<span>起</span></p>
+                                            <p>${all[i].average_unit_price_begin}元/m <sup>2</sup></p>
+                                        </div>
+                                        <div class="right_servant">
+                                            <p>佣</p>
+                                            <p>${all[i].commission_begin}-${all[i].commission_end}万</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        `
+                    }
+                    //放入页面的容器显示
+                    $('.tower').append(str);
+                    var strTag='';
+                    for(var j=0;j<allTag.length;j++){
+                       strTag+= ` <p>${allTag[j]}</p>`;
+                    }
+                    $('.right_area').append(strTag);
+                    $('.logoding').hide();
+                }else {
+                    $('.logoding').hide();
+                }
+            },
+            error:function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
+    })
 </script>
 </html>
 
