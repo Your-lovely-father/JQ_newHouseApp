@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e4428a53-a1bb-4e43-a75f-f7c58f05284e" name="xiaoleng" url="http://192.168.1.112:8089/JQ_newHouseApp/login.html">
+        <fileTransfer port="0" mountedRoot="C:\Users\Administrator\Desktop\可立刻前端项目目录" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>
