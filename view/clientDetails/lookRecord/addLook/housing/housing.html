@@ -92,11 +92,15 @@
 <script type="text/javascript" src="../../../../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
     access_token=localStorageGet('access_token');
+    personal_data=localStorageGet('personal_data');
     id=''; //楼盘id
     buildName='';//楼盘名称
     buildingList={
         page:1,
         offset:999,
+        province_id:personal_data.province_id,
+        city_id:personal_data.city_id,
+        area_id:personal_data.area_id,
         building_name:''
     };
     $(function () {

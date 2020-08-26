@@ -270,13 +270,13 @@
 <!--                    </a>-->
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="javascript:;">
                         <span class="iconfont icon-shoucang2"></span>
                         <p>收藏</p>
                     </a>
                 </li>
                 <li>
-                    <a href="#">
+                    <a href="javascript:;">
                         <span class="iconfont icon-fenxiang1"></span>
                         <p>分享</p>
                     </a>
@@ -557,7 +557,7 @@
             var flag=$('.fu>ul>li:nth-child(2)>a>span').hasClass('activeIcon');
             if(flag){
                 collectionData.enshrine_type=10;
-                if(which=='index'||which=='building' || which=='housing'){
+                if(which=='index'||which=='building' || which=='housing' || which=='likeHousing'){
                     $.ajax({
                         url:api+"/api/click_enshrine" ,
                         type:"POST" ,
@@ -588,7 +588,7 @@
                 }
             }else {
                 collectionData.enshrine_type=20;
-                if(which=='collection'||which=='index'||which=='building' || which=='housing'){
+                if(which=='collection'||which=='index'||which=='building' || which=='housing' || which=='likeHousing'){
                     $.ajax({
                         url:api+"/api/click_enshrine" ,
                         type:"POST" ,
