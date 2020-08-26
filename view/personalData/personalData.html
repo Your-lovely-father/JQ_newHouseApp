@@ -9,11 +9,23 @@
     <link rel="stylesheet" href="../../static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="../../static/css/layouts/layouts.css"/>
     <link rel="stylesheet" href="../../static/css/common/footer.css"/>
+    <link rel="stylesheet" href="../../static/css/common/logoding.css"/>
     <link rel="stylesheet" href="../../static/css/personalData.css"/>
     <script type="text/javascript" src="../../static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="../../static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="wode">
     <!--  头部   -->
     <div class="head_nav">
@@ -31,11 +43,12 @@
     <div class="head_portrait">
         <div class="head_portrait_box">
             <div class="image">
-                <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1162156213,1315517590&fm=26&gp=0.jpg" alt="">
+                <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=1162156213,1315517590&fm=26&gp=0.jpg"
+                     alt="">
             </div>
             <label for="fileinp">
                 <input type="button" id="btn" value="更换头像">
-                <input type="file" id="fileinp">
+                <input type="file" id="fileinp" class="btn_portrait">
             </label>
         </div>
     </div>
@@ -54,12 +67,12 @@
                     <span class="iconfont icon-iconfonti"></span>
                 </a>
             </div>
-<!--            <div class="label_content">-->
-<!--                <a href="#">-->
-<!--                    <p>绑定信息</p>-->
-<!--                    <span class="iconfont icon-iconfonti"></span>-->
-<!--                </a>-->
-<!--            </div>-->
+            <!--            <div class="label_content">-->
+            <!--                <a href="#">-->
+            <!--                    <p>绑定信息</p>-->
+            <!--                    <span class="iconfont icon-iconfonti"></span>-->
+            <!--                </a>-->
+            <!--            </div>-->
         </div>
         <div class="upd_password">
             <div class="form_content">
@@ -97,40 +110,145 @@
 </body>
 <script type="text/javascript" src="../../static/js/common/image.js"></script>
 <script type="text/javascript" src="../../static/js/common/token.js"></script>
+<script type="text/javascript" src="../../static/js/common/alrte.js"></script>
 <script type="text/javascript" src="../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
-    var personal_data=localStorageGet('personal_data');
+    personal_data = localStorageGet('personal_data');
     token('../../login.html');
-    echoImg(".image>img",personal_data.user_image);
-    // $(function () {
-    //     $('.name').click(function () {
-    //         $('.prompt_alert').show();
-    //          return false;
-    //     })
-    // });
-    // function shutDown() {
-    //     $('.prompt_alert').hide();
-    // }
-    // function promptBox(val){
-    //     $('.prompt_box').show();
-    //     $('.prompt_box>p').html(val);
-    //     setTimeout(function () {
-    //         $('.prompt_box').hide();
-    //     },1000);
-    // }
-    // //关闭X
-    // $('.alert_herder>p:nth-child(3)').click(function () {
-    //     shutDown()
-    // });
-    // //取消
-    // $('.alert_footer>button:nth-child(1)').click(function () {
-    //     shutDown();
-    //     promptBox('您已取消')
-    // });
-    // //确认
-    // $('.alert_footer>button:nth-child(2)').click(function () {
-    //     shutDown();
-    //     promptBox('修改成功')
-    // })
+    echoImg(".image>img", personal_data.user_image);
+    access_token = localStorageGet('access_token');
+    api = "http://192.168.1.105:8080";
+    function shutDown() {
+        $('.prompt_alert').hide();
+    }
+    function upd(val, num) {
+        if(num===0){
+            localStorageSet('img',val);
+        }
+        if(num===1){
+          localStorageSet('name',val);
+        }
+        var personalData = {
+            id: personal_data.id,
+            user_name:localStorageGet('name') == ''?personal_data.user_name:localStorageGet('name'),
+            user_sex: personal_data.user_sex,
+            user_phone: personal_data.user_phone,
+            user_image:localStorageGet('img') == ''?personal_data.user_image:localStorageGet('img'),
+            user_age: personal_data.user_age,
+            user_id_card: personal_data.user_id_card,
+            user_status: personal_data.user_status,
+            user_role: personal_data.user_role,
+            area_id: personal_data.area_id,
+            province_id: personal_data.province_id,
+            city_id: personal_data.city_id,
+            storefront_id: personal_data.storefront_id,
+            mobile_terminal_status: personal_data.mobile_terminal_status,
+        };
+        $.ajax({
+            url: api + "/erp/user_edit",
+            type: "POST",
+            dataType: "json",
+            headers: {
+                'access-token': access_token
+            },
+            data: personalData,
+            success: function (data) {
+                if (num == 0) {
+                    if (data.code == "200003") {
+                        details();
+                    }
+                } else {
+                    if (data.code == '200003') {
+                        promptBox("修改成功");
+                        details();
+                        shutDown();
+                        $('.logoding').hide();
+                    } else {
+                        promptBox('修改失败');
+                        $('.logoding').hide();
+                    }
+                }
+            },
+        });
+    }
+    function details() {
+        var personalId = {
+            id: personal_data.id,
+        };
+        $.ajax({
+            url: api + "/erp/user_detail",
+            type: "POST",
+            dataType: "json",
+            headers: {
+                'access-token': access_token
+            },
+            data: personalId,
+            success: function (data) {
+                if (data.code == 200) {
+                    localStorageSet('personal_data', data.data);
+                    window.location.reload()
+                }
+            },
+        });
+    }
+    $(".btn_portrait").on("change", function (event) {
+        var file = event.target.files[0];
+        if (file) {
+            upload(file);
+        }
+    });
+    function upload(file) {
+        var formData = new FormData();
+        formData.append("files", file);
+        formData.append("type", '3');
+        $.ajax({
+            url: api + "/erp/upload_file",
+            type: "POST",
+            dataType: "json",
+            data: formData,
+            contentType: false,
+            processData: false,
+            headers: {
+                'access-token': access_token
+            },
+            beforeSend: function () {
+                $('.logoding').show();
+            },
+            success: function (data) {
+                if (data.code == "200005") {
+                    promptBox("修改成功");
+                    upd(data.data.url, 0);
+                    $('.logoding').hide();
+                } else {
+                    promptBox('修改失败');
+                    $('.logoding').hide();
+                }
+            },
+            error: function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
+    }
+    $(function () {
+        $('.name').click(function () {
+            $('.prompt_alert').show();
+            return false;
+        })
+    });
+    //关闭X
+    $('.alert_herder>p:nth-child(3)').click(function () {
+        shutDown()
+    });
+    //取消
+    $('.alert_footer>button:nth-child(1)').click(function () {
+        shutDown();
+        promptBox('您已取消')
+    });
+    //确认
+    $('.alert_footer>button:nth-child(2)').click(function () {
+        var user_name = $('.alert_content>input').val().trim();
+        upd(user_name, 1);
+    })
 </script>
 </html>
