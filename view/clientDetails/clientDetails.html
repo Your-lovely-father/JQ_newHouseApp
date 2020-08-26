@@ -49,8 +49,8 @@
         </div>
         <div class="with">
             <p>带看需求</p>
-            <p>
-                <a href="lookRecord/lookRecord.html">
+            <p class="add_look">
+                <a href="#">
                     添加带看
                 </a>
             </p>
@@ -65,8 +65,8 @@
                 </div>
                 <div class="follow_box_right">
                     <p>
-                        <span class="same_type storefront_name">门店:</span>
-                        <span class="remarks">曹妃甸</span>
+                        <span class="same_type">门店:</span>
+                        <span class="storefront_name">曹妃甸</span>
                     </p>
                 </div>
             </div>
@@ -74,7 +74,7 @@
                 <div class="follow_box_left">
                     <p>
                         <span class="same_type">备注:</span>
-                        <span>哈哈哈</span>
+                        <span class="remarks">哈哈哈</span>
                     </p>
                 </div>
                 <div class="follow_box_right">
@@ -86,7 +86,7 @@
             </div>
         </div>
         <div class="follow_btn">
-            <a href="follow/follow.html">
+            <a href="#">
                 <ul>
                     <li>
                         <span class="same_type">跟进:</span>
@@ -100,8 +100,8 @@
         </div>
         <div class="with">
             <p>意向房源</p>
-            <p>
-                <a href="likeHousing/likeHousing.html">
+            <p class="link_add">
+                <a href="#">
                     添加意向
                 </a>
             </p>
@@ -163,6 +163,21 @@
                    $('.user_name').text(all.user_name);
                    $('.user_phone').text(all.user_phone);
                    $('.logoding').hide();
+                   //添加带看
+                   $('.add_look>a').click(function () {
+                       window.location.href='lookRecord/lookRecord.html';
+                       localStorageSet('client_id',all.client_id)
+                   });
+                   //添加跟进
+                   $('.follow_btn>a').click(function () {
+                       window.location.href='follow/follow.html';
+                       localStorageSet('client_id',all.client_id)
+                   });
+                   //添加意向楼盘
+                   $('.link_add>a').click(function () {
+                       window.location.href='likeHousing/likeHousing.html';
+                       localStorageSet('client_id',all.client_id)
+                   })
                }else {
                    $('.logoding').hide();
                }

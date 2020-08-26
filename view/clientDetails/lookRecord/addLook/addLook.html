@@ -9,12 +9,24 @@
     <script  src="../../../../static/css/libs/jedate/jedate.js"></script>
     <link rel="stylesheet" href="../../../../static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="../../../../static/css/layouts/layouts.css"/>
+    <link rel="stylesheet" href="../../../../static/css/common/logoding.css">
     <link rel="stylesheet" href="../../../../static/css/common/footer.css"/>
     <link rel="stylesheet" href="../../../../static/css/addLook.css"/>
     <script type="text/javascript" src="../../../../static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="../../../../static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
     <div class="addLook">
         <!--  头部   -->
         <div class="head_nav">
@@ -41,7 +53,7 @@
             <div class="housing">
                 <a href="housing/housing.html">
                     <p>房源</p>
-                    <p class="select">请选择<span class="iconfont icon-iconfonti"></span></p>
+                    <p><span class="select">请选择</span><span class="iconfont icon-iconfonti"></span></p>
                 </a>
             </div>
             <div class="record">
@@ -57,6 +69,9 @@
         </div>
     </div>
 </body>
+<script type="text/javascript" src="../../../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../../../static/js/common/api.js"></script>
+<script type="text/javascript" src="../../../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
     jeDate({
         dateCell: "#dateTime",
@@ -69,12 +84,24 @@
     var date = new Date();
     var dateString = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + "  " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     mydateInput.value = dateString;
-    function promptBox(val){
-        $('.prompt_box').show();
-        $('.prompt_box>p').html(val);
-        setTimeout(function () {
-            $('.prompt_box').hide();
-        },1000);
+
+    access_token=localStorageGet('access_token');
+    personal_data=localStorageGet('personal_data');
+    client_id=localStorageGet('client_id');
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return decodeURI(r[2]);
+        return null; //返回参数值
+    }
+    //接收URL中的参数id
+    id = getUrlParam('id');
+    buildName = getUrlParam('buildName');
+    if(buildName){
+        $('.housing>a>p:nth-child(2)').html(`
+            <span class="select">${buildName}</span><span class="iconfont icon-iconfonti"></span>
+        `);
     }
     $(function () {
         $('.confirm').click(function () {
@@ -93,8 +120,41 @@
                 promptBox('请填写带看记录');
                 return false;
             }
-            window.location.href='../lookRecord.html';
-            return false;
+            var data={
+                guide_look_content:textarea,
+                client_id:id,
+                user_id:personal_data.id,
+                area_id:personal_data.area_id,
+                storefront_id:personal_data.storefront_id,
+                building_id:select,
+                look_time:dateTime,
+            };
+            $.ajax({
+                url:api+"/erp/guide_look_add" ,
+                type:"POST" ,
+                dataType:"json",
+                data:data,
+                headers:{
+                    'access-token':access_token
+                },
+                beforeSend:function(){
+                    $('.logoding').show();
+                },
+                success:function (data) {
+                    if(data.code=="200001"){
+                        promptBox("添加带看成功");
+                        window.location.href='../lookRecord.html';
+                        $('.logoding').hide();
+                    }else {
+                        promptBox("添加带看失败");
+                        $('.logoding').hide();
+                    }
+                },
+                error:function () {
+                    promptBox("出错啦...");
+                    $('.logoding').hide();
+                },
+            });
         })
     })
 </script>

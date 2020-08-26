@@ -320,7 +320,7 @@
     function getUrlParam(name) {
         var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
         var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-        if (r != null) return unescape(r[2]);
+        if (r != null) return decodeURI(r[2]);
         return null; //返回参数值
     }
     //接收URL中的参数id
@@ -557,7 +557,7 @@
             var flag=$('.fu>ul>li:nth-child(2)>a>span').hasClass('activeIcon');
             if(flag){
                 collectionData.enshrine_type=10;
-                if(which=='index'||which=='building'){
+                if(which=='index'||which=='building' || which=='housing'){
                     $.ajax({
                         url:api+"/api/click_enshrine" ,
                         type:"POST" ,
@@ -588,7 +588,7 @@
                 }
             }else {
                 collectionData.enshrine_type=20;
-                if(which=='collection'||which=='index'||which=='building'){
+                if(which=='collection'||which=='index'||which=='building' || which=='housing'){
                     $.ajax({
                         url:api+"/api/click_enshrine" ,
                         type:"POST" ,

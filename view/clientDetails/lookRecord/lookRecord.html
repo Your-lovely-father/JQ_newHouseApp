@@ -89,15 +89,16 @@
                if(data.code==200){
                     var all=data.data.data;
                     var str='';
+                    var addStr='';
                     for(var i=0;i<all.length;i++){
                         str+=`
                         <a href=${"lookDetails/lookDetails.html?id="+all[i].id}>
                             <p>${all[i].guide_look_content}</p>
                             <p>${all[i].look_time}</p>
                         </a>
-                        `
+                        `;
                     }
-                    $('.client_each').html(str);
+                   $('.client_each').html(str);
                    $('.logoding').hide();
                }else {
                    $('.logoding').hide();

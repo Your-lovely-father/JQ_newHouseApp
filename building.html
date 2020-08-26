@@ -201,7 +201,7 @@
     screening = {
         page: 1,
         offset: 999,
-        is_hot: 10,
+        is_hot: '',
         city_id: '',
         area_id: '',
         orders: 'asc',
@@ -330,6 +330,7 @@
                 _this.screening.area_id = '';
                 _this.screening.orders = 'asc';
                 _this.screening.acreage_num = '';
+                _this.screening.is_hot = '';
                 $('.orientation>li>p').removeClass('active1');
                 $('.sort>li>p').removeClass('activeColor');
                 $('.type_model>li>p').removeClass('active1');
@@ -512,7 +513,6 @@
                 },
             });
         });
-
         //楼盘数据
         function buildingData() {
             $.ajax({
