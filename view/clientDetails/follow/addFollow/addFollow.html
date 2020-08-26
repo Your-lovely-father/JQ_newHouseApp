@@ -10,11 +10,23 @@
     <link rel="stylesheet" href="../../../../static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="../../../../static/css/layouts/layouts.css"/>
     <link rel="stylesheet" href="../../../../static/css/common/footer.css"/>
+    <link rel="stylesheet" href="../../../../static/css/common/logoding.css">
     <link rel="stylesheet" href="../../../../static/css/addLook.css"/>
     <script type="text/javascript" src="../../../../static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="../../../../static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
     <div class="addLook">
         <!--  头部   -->
         <div class="head_nav">
@@ -26,7 +38,7 @@
                 </li>
                 <li>添加跟进</li>
                 <li>
-                    <a href="#" class="confirm">
+                    <a href="javascript:;" class="confirm">
                         确认
                     </a>
                 </li>
@@ -51,6 +63,9 @@
         </div>
     </div>
 </body>
+<script type="text/javascript" src="../../../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../../../static/js/common/api.js"></script>
+<script type="text/javascript" src="../../../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
     jeDate({
         dateCell: "#dateTime",
@@ -63,13 +78,11 @@
     var date = new Date();
     var dateString = date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate() + "  " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
     mydateInput.value = dateString;
-    function promptBox(val){
-        $('.prompt_box').show();
-        $('.prompt_box>p').html(val);
-        setTimeout(function () {
-            $('.prompt_box').hide();
-        },1000);
-    }
+
+    access_token=localStorageGet('access_token');
+    personal_data=localStorageGet('personal_data');
+    client_id=localStorageGet('client_id');
+
     $(function () {
         $('.confirm').click(function () {
             var dateTime=$('#dateTime').val().trim();
@@ -82,8 +95,40 @@
                 promptBox('请填写带看记录');
                 return false;
             }
-            window.location.href='../follow.html';
-            return false;
+            var data={
+                record_content:textarea,
+                client_id:client_id,
+                user_id:personal_data.id,
+                area_id:personal_data.area_id,
+                storefront_id:personal_data.storefront_id,
+                follow_time:dateTime,
+            };
+            $.ajax({
+                url:api+"/erp/follow_up_add" ,
+                type:"POST" ,
+                dataType:"json",
+                data:data,
+                headers:{
+                    'access-token':access_token
+                },
+                beforeSend:function(){
+                    $('.logoding').show();
+                },
+                success:function (data) {
+                    if(data.code=="200001"){
+                        promptBox("添加跟进成功");
+                        window.location.href='../follow.html';
+                        $('.logoding').hide();
+                    }else {
+                        promptBox("添加跟进失败");
+                        $('.logoding').hide();
+                    }
+                },
+                error:function () {
+                    promptBox("出错啦...");
+                    $('.logoding').hide();
+                },
+            });
         })
     })
 </script>

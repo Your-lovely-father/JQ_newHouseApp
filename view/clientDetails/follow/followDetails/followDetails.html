@@ -9,11 +9,23 @@
     <link rel="stylesheet" href="../../../../static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="../../../../static/css/layouts/layouts.css"/>
     <link rel="stylesheet" href="../../../../static/css/common/footer.css"/>
+    <link rel="stylesheet" href="../../../../static/css/common/logoding.css"/>
     <link rel="stylesheet" href="../../../../static/css/addLook.css"/>
     <script type="text/javascript" src="../../../../static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="../../../../static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="addLook">
     <!--  头部   -->
     <div class="head_nav">
@@ -40,10 +52,56 @@
             </div>
         </div>
     </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
+    </div>
 </div>
 </body>
+<script type="text/javascript" src="../../../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../../../static/js/common/api.js"></script>
+<script type="text/javascript" src="../../../../static/js/common/localStorage.js"></script>
 <script type="text/javascript">
-
+    access_token=localStorageGet('access_token');
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return decodeURI(r[2]);
+        return null; //返回参数值
+    }
+    //接收URL中的参数id
+    id = getUrlParam('id');
+    $(function () {
+        var data={
+            id:id
+        };
+        $.ajax({
+            url:api+"/erp/follow_up_detail" ,
+            type:"POST" ,
+            dataType:"json",
+            data:data,
+            headers:{
+                'access-token':access_token
+            },
+            beforeSend:function(){
+                $('.logoding').show();
+            },
+            success:function (data) {
+                if(data.code==200){
+                    var all=data.data;
+                    $('#dateTime').val(all.follow_time);
+                    $('.textarea_box>textarea').text(all.record_content);
+                    $('.logoding').hide();
+                }else {
+                    $('.logoding').hide();
+                }
+            },
+            error:function () {
+                promptBox("出错啦...");
+                $('.logoding').hide();
+            },
+        });
+    })
 </script>
-
 </html>

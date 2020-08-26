@@ -38,7 +38,7 @@
                 </li>
                 <li>添加带看</li>
                 <li>
-                    <a href="#" class="confirm">
+                    <a href="javascript:;" class="confirm">
                         确认
                     </a>
                 </li>
@@ -96,7 +96,7 @@
         return null; //返回参数值
     }
     //接收URL中的参数id
-    id = getUrlParam('id');
+    id = getUrlParam('id'); //楼盘id
     buildName = getUrlParam('buildName');
     if(buildName){
         $('.housing>a>p:nth-child(2)').html(`
@@ -122,13 +122,14 @@
             }
             var data={
                 guide_look_content:textarea,
-                client_id:id,
+                client_id:client_id,
                 user_id:personal_data.id,
                 area_id:personal_data.area_id,
                 storefront_id:personal_data.storefront_id,
-                building_id:select,
+                building_id:id,
                 look_time:dateTime,
             };
+            console.log(data)
             $.ajax({
                 url:api+"/erp/guide_look_add" ,
                 type:"POST" ,
