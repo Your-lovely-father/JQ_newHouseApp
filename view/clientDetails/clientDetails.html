@@ -9,11 +9,23 @@
     <link rel="stylesheet" href="../../static/css/layouts/layouts.css" />
     <link rel="stylesheet" href="../../static/css/libs/font/iconfont.css">
     <link rel="stylesheet" href="../../static/css/common/footer.css">
+    <link rel="stylesheet" href="../../static/css/common/logoding.css">
     <link rel="stylesheet" href="../../static/css/clientDetails.css">
     <script type="text/javascript" src="../../static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="../../static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="clientDetails">
     <!--  头部   -->
     <div class="head_nav">
@@ -31,8 +43,8 @@
     <div class="clientDetails_box">
         <div class="information">
             <div class="name">
-                <p> <span class="same_kind">姓名:</span> <span>东东</span></p>
-                <p> <span class="same_kind">电话:</span> <span>1774777777677</span></p>
+                <p> <span class="same_kind">姓名:</span> <span class="client_name">东东</span></p>
+                <p> <span class="same_kind">电话:</span> <span class="client_phone">1774777777677</span></p>
             </div>
         </div>
         <div class="with">
@@ -48,13 +60,13 @@
                 <div class="follow_box_left">
                     <p>
                         <span class="same_type">区域:</span>
-                        <span>沈阳/铁西区/铁西广场</span>
+                        <span class="area">沈阳/铁西区/铁西广场</span>
                     </p>
                 </div>
                 <div class="follow_box_right">
                     <p>
-                        <span class="same_type">门店:</span>
-                        <span>曹妃甸</span>
+                        <span class="same_type storefront_name">门店:</span>
+                        <span class="remarks">曹妃甸</span>
                     </p>
                 </div>
             </div>
@@ -68,7 +80,7 @@
                 <div class="follow_box_right">
                     <p>
                         <span class="same_type">时间:</span>
-                        <span>2020-08-20 15:16:03</span>
+                        <span class="update_time">2020-08-20 15:16:03</span>
                     </p>
                 </div>
             </div>
@@ -96,11 +108,70 @@
         </div>
         <div class="information">
             <div class="name">
-                <p> <span class="same_kind">维护人:</span> <span>咯咯</span></p>
-                <p> <span class="same_kind">电话:</span> <span>1774777777677</span></p>
+                <p> <span class="same_kind">维护人:</span> <span class="user_name">咯咯</span></p>
+                <p> <span class="same_kind">电话:</span> <span class="user_phone">1774777777677</span></p>
             </div>
         </div>
     </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
+    </div>
 </div>
 </body>
+<script type="text/javascript" src="../../static/js/common/alrte.js"></script>
+<script type="text/javascript" src="../../static/js/common/api.js"></script>
+<script type="text/javascript" src="../../static/js/common/localStorage.js"></script>
+<script type="text/javascript">
+    access_token=localStorageGet('access_token');
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return decodeURI(r[2]);
+        return null; //返回参数值
+    }
+    //接收URL中的参数id
+    client_id = getUrlParam('client_id');
+    city_name = getUrlParam('city_name');
+    area_name = getUrlParam('area_name');
+    storefront_name = getUrlParam('storefront_name');
+   $(function () {
+       var data={
+           client_id:client_id
+       };
+       $.ajax({
+           url:api+"/erp/client_report_detail" ,
+           type:"POST" ,
+           dataType:"json",
+           data:data,
+           headers:{
+                'access-token':access_token
+           },
+           beforeSend:function(){
+               $('.logoding').show();
+           },
+           success:function (data) {
+               if(data.code==200){
+                   var all=data.data;
+                   $('.client_name').text(all.client_name);
+                   $('.client_phone').text(all.client_phone);
+                   $('.area').text(city_name+' / '+area_name);
+                   $('.storefront_name').text(storefront_name);
+                   $('.remarks').text(all.remarks);
+                   $('.update_time').text(all.update_time);
+                   $('.user_name').text(all.user_name);
+                   $('.user_phone').text(all.user_phone);
+                   $('.logoding').hide();
+               }else {
+                   $('.logoding').hide();
+               }
+           },
+           error:function () {
+               promptBox("出错啦...");
+               $('.logoding').hide();
+           },
+       });
+   })
+</script>
 </html>

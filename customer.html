@@ -131,7 +131,7 @@
                     var str='';
                     for(var i = 0; i < all.length; i++){
                         str+=`
-                         <a href="view/clientDetails/clientDetails.html">
+                         <a href=${"view/clientDetails/clientDetails.html?client_id="+all[i].client_id+'&city_name='+all[i].city_name+'&area_name='+all[i].area_name+'&storefront_name='+all[i].storefront_name}>
                             <p>${all[i].client_name}</p>
                             <p>${all[i].update_time}</p>
                         </a>
