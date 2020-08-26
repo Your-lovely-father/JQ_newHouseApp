@@ -191,7 +191,7 @@
                         allTag=all[i].building_type_name.split(',');
                         str += `
                            <div class="tower_content">
-                                <a href=${'view/details/details.html?id='+all[i].id}>
+                                <a href=${'view/details/details.html?id='+all[i].id+'&which='+'index'}>
                                     <div class="tower_left">
                                         <img src=${imgApi+all[i].building_img_url} alt="">
                                         <p>${all[i].is_hot ==20 ? '推荐': '热销'}</p>
@@ -220,12 +220,12 @@
                         `
                     }
                     //放入页面的容器显示
-                    $('.tower').append(str);
+                    $('.tower').html(str);
                     var strTag='';
                     for(var j=0;j<allTag.length;j++){
                        strTag+= ` <p>${allTag[j]}</p>`;
                     }
-                    $('.right_area').append(strTag);
+                    $('.right_area').html(strTag);
                     $('.logoding').hide();
                 }else {
                     $('.logoding').hide();

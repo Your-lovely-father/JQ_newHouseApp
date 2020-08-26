@@ -328,3 +328,6 @@
     width: 80%;
     font-size: .4rem;
 }
+.activeIcon{
+    color: #c72a23 !important;
+}

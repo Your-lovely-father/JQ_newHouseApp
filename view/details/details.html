@@ -10,12 +10,24 @@
     <link rel="stylesheet" href="../../static/css/plugins/swiper.min.css">
     <link rel="stylesheet" href="../../static/css/layouts/layouts.css"/>
     <link rel="stylesheet" href="../../static/css/common/footer.css"/>
+    <link rel="stylesheet" href="../../static/css/common/logoding.css">
     <link rel="stylesheet" href="../../static/css/details.css"/>
     <script type="text/javascript" src="../../static/js/plugins/jquery.min.js"></script>
     <script type="text/javascript" src="../../static/js/plugins/swiper.min.js"></script>
     <script type="text/javascript" src="../../static/js/plugins/rem.js"></script>
 </head>
 <body>
+<!-- 加载动画-->
+<div class="logoding">
+    <div class="mi">
+        <div class="bar bar1"></div>
+        <div class="bar bar2"></div>
+        <div class="bar bar3"></div>
+        <div class="bar bar4"></div>
+        <div class="bar bar5"></div>
+        <div class="bar bar6"></div>
+    </div>
+</div>
 <div class="details">
     <!--  头部   -->
     <div class="head_nav">
@@ -252,13 +264,13 @@
         <div class="fu">
             <ul>
                 <li>
-                    <a href="#">
-                        <span class="iconfont icon-weibiaoti-"></span>
-                        <p>电话</p>
-                    </a>
+<!--                    <a href="#">-->
+<!--                        <span class="iconfont icon-weibiaoti-"></span>-->
+<!--                        <p>电话</p>-->
+<!--                    </a>-->
                 </li>
                 <li>
-                    <a href="../collection/collection.html">
+                    <a href="#">
                         <span class="iconfont icon-shoucang2"></span>
                         <p>收藏</p>
                     </a>
@@ -276,6 +288,10 @@
                 立即推荐
             </a>
         </div>
+    </div>
+    <!--  提示框区域   -->
+    <div class="prompt_box">
+        <p></p>
     </div>
 </div>
 </body>
@@ -297,21 +313,24 @@
         // 如果需要分页器，即下面的小圆点
         pagination: '.swiper-pagination',
     });
+    imgApi = 'https://erp-report-shenyang.oss-cn-beijing.aliyuncs.com/';
+    access_token = localStorageGet('access_token');
+    personal_data = localStorageGet('personal_data');
+    //获取url中的参数
+    function getUrlParam(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(r[2]);
+        return null; //返回参数值
+    }
+    //接收URL中的参数id
+    id = getUrlParam('id');
+    which = getUrlParam('which');
+    data = {
+        id: id
+    };
+    //详情
     $(function () {
-        imgApi = 'https://erp-report-shenyang.oss-cn-beijing.aliyuncs.com/';
-        access_token = localStorageGet('access_token');
-        //获取url中的参数
-        function getUrlParam(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
-            if (r != null) return unescape(r[2]);
-            return null; //返回参数值
-        }
-        //接收URL中的参数id
-        var id = getUrlParam('id');
-        data = {
-            id: id
-        };
         $.ajax({
             url: api + "/erp/building_detail",
             type: "POST",
@@ -326,7 +345,7 @@
             success: function (data) {
                 if (data.code == 200) {
                     var swiperImg = data.data.building_img;
-                    var modelImg = data.data.building_img;
+                    var modelImg = data.data.floor_img;
                     var all = data.data.data;
                     var str1 = '';//轮播图
                     for (var i = 0; i < swiperImg.length; i++) {
@@ -336,14 +355,14 @@
                             </div>
                         `
                     }
-                    $('.bander').append(str1);
+                    $('.bander').html(str1);
                     //详情数据
                     var str2 = '';//标签
                     var tag = all.building_type_name.split(',');
                     for (var j = 0; j < tag.length; j++) {
                         str2 += ` <p>${tag[j]}</p>`;
                     }
-                    $('.label_left').append(str2);
+                    $('.label_left').html(str2);
                     $('.building_name').text(all.building_name);//楼盘名称
                     $('.label_right>p').text('开盘时间 :' + all.opening_time);//开盘时间
                     $('.headlines_route>p').text('经济示范区 ,' + all.building_selling_points);//经济示范区
@@ -412,7 +431,7 @@
                             </div>
                         `
                     }
-                    $('.img_box').append(str3);
+                    $('.img_box').html(str3);
                     $('.traffic').text(all.traffic);//交通设施
                     $('.education').text(all.education);//教育资源
                     $('.medical_treatment').text(all.medical_treatment);//医疗卫生
@@ -469,6 +488,12 @@
                     $('.plot_ratio').text(all.plot_ratio);//容积率
                     $('.property_management_company').text(all.property_management_company);//物业公司
                     $('.date_released').text(all.date_released);//交付日期
+                    $('.fu>ul>li:nth-child(1)').html(`
+                     <a href=${'tel:'+all.building_phone}>
+                        <span class="iconfont icon-weibiaoti-"></span>
+                        <p>电话</p>
+                    </a>
+                    `);
                     $('.logoding').hide();
                 } else {
                     promptBox(data.msg);
@@ -480,6 +505,121 @@
                 $('.logoding').hide();
             },
         });
+    });
+    //收藏
+    $(function () {
+       function collectionData(){
+           var collectionData={
+               page:1,
+               offset:999,
+               user_id:personal_data.id,
+           };
+           $.ajax({
+               url:api+"/api/get_enshrine_list" ,
+               type:"POST" ,
+               dataType:"json",
+               data:collectionData,
+               headers: {
+                   'access-token': access_token
+               },
+               beforeSend:function(){
+                   $('.logoding').show();
+               },
+               success:function (data) {
+                   if(data.code==200){
+                       var all=data.data.data;
+                       for(var i=0;i<all.length;i++){
+                          var collectionId=all[i].id;
+                           console.log(collectionId==id)
+                          if(id == collectionId){
+                              $('.fu>ul>li:nth-child(2)>a>span').addClass('activeIcon');
+                          }
+                       }
+                       $('.logoding').hide();
+                   }else {
+                       $('.logoding').hide();
+                   }
+               },
+               error:function () {
+                   promptBox("出错啦...");
+                   $('.logoding').hide();
+               },
+           });
+       }
+        collectionData();
+        $('.fu>ul>li:nth-child(2)>a').click(function () {
+            var collectionData={
+                building_id:id,
+                user_id:personal_data.id,
+                enshrine_type:''
+            };
+            $('.fu>ul>li:nth-child(2)>a>span').toggleClass('activeIcon');
+            var flag=$('.fu>ul>li:nth-child(2)>a>span').hasClass('activeIcon');
+            if(flag){
+                collectionData.enshrine_type=10;
+                if(which=='index'||which=='building'){
+                    $.ajax({
+                        url:api+"/api/click_enshrine" ,
+                        type:"POST" ,
+                        dataType:"json",
+                        data:collectionData,
+                        headers: {
+                            'access-token': access_token
+                        },
+                        beforeSend:function(){
+                            $('.logoding').show();
+                        },
+                        success:function (data) {
+                            if(data.code=='200009'){
+                                promptBox("收藏成功");
+                                $('.logoding').hide();
+                            }else {
+                                promptBox('收藏失败');
+                                $('.logoding').hide();
+                                $('.fu>ul>li:nth-child(2)>a>span').removeClass('activeIcon');
+                            }
+                        },
+                        error:function () {
+                            promptBox("出错啦...");
+                            $('.logoding').hide();
+                            $('.fu>ul>li:nth-child(2)>a>span').removeClass('activeIcon');
+                        },
+                    });
+                }
+            }else {
+                collectionData.enshrine_type=20;
+                if(which=='collection'||which=='index'||which=='building'){
+                    $.ajax({
+                        url:api+"/api/click_enshrine" ,
+                        type:"POST" ,
+                        dataType:"json",
+                        data:collectionData,
+                        headers: {
+                            'access-token': access_token
+                        },
+                        beforeSend:function(){
+                            $('.logoding').show();
+                        },
+                        success:function (data) {
+                            if(data.code=='200009'){
+                                promptBox("取消收藏成功");
+                                $('.fu>ul>li:nth-child(2)>a>span').removeClass('activeIcon');
+                                $('.logoding').hide();
+                            }else {
+                                promptBox('取消收藏失败');
+                                $('.logoding').hide();
+                                $('.fu>ul>li:nth-child(2)>a>span').addClass('activeIcon');
+                            }
+                        },
+                        error:function () {
+                            promptBox("出错啦...");
+                            $('.logoding').hide();
+                            $('.fu>ul>li:nth-child(2)>a>span').addClass('activeIcon');
+                        },
+                    });
+                }
+            }
+        })
     })
 </script>
 </html>
