@@ -326,6 +326,14 @@
             var int = $('.input-cname').val();
             if(event.keyCode ==13){
                 _this.screening.building_name = int;
+                _this.screening.city_id = '';
+                _this.screening.area_id = '';
+                _this.screening.orders = 'asc';
+                _this.screening.acreage_num = '';
+                $('.orientation>li>p').removeClass('active1');
+                $('.sort>li>p').removeClass('activeColor');
+                $('.type_model>li>p').removeClass('active1');
+                $('.acreage>li>p').removeClass('active1');
                 buildingData()
             }
         });
@@ -380,14 +388,19 @@
         //面积切换背景/字体颜色
         $(function () {
             $('.acreage>li>p').click(function () {
-                $(this).addClass('active1');
+                $(this).toggleClass('active1');
+                var flag=$(this).hasClass('active1');
+                if(flag){
+                    var container = $(this).text();
+                    _this.screening.acreage_num = container.split('m')[0];
+                }else {
+                    _this.screening.acreage_num = '';
+                }
+                console.log(_this.screening);
                 $(this).siblings().removeClass('active1');
-                var container = $(this).text();
-                _this.screening.acreage_num = container.split('m')[0];
                 buildingData()
             })
         });
-
         //区数据
         function areaData(val) {
             var citydata = localStorageGet('citydata');
@@ -402,11 +415,10 @@
                         <p class="all">${el.AREA_NAME}</p>
                        `;
                     });
-                    $('.orientation>li').append(area)
+                    $('.orientation>li').html(area)
                 }
             })
         }
-
         //获取当前位置
         $(function () {
             var cname = returnCitySN["cname"];// 获取当前所在城市
